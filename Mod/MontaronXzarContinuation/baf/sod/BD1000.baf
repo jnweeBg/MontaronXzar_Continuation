@@ -1,0 +1,76 @@
+// Spawn Monty & Xzar script
+// JNMONTSodTalk as a main variable to keep track of talks - = 1 -> for firt dialogue
+// JNMONTSodRecruited == 1 -> they have been recruited to the crusade and will tag along
+
+// no script if Monty or Xzar or already in the party or dead
+IF
+	Global("JNMONTSodSpawn","GLOBAL",0)
+	Global("JNXZARSodSpawn","GLOBAL",0)
+	OR(4)
+	InPartyAllowDead("Montaron")
+	InPartyAllowDead("Xzar")
+	Dead("Montaron")
+	Dead("Xzar")
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONTSodSpawn","GLOBAL",2)
+		SetGlobal("JNXZARSodSpawn","GLOBAL",2)
+		Continue()
+END
+
+// Spawn Montaron (if he & Xzar were in party in bg1 & are not dead)
+IF
+	BeenInParty("Montaron")
+	BeenInParty("Xzar")
+	!Dead("Montaron")
+	!Dead("Xzar")
+	Global("JNMONTSodSpawn","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONTSodSpawn","GLOBAL",1)
+		MoveGlobal("BD1000","Montaron",[3780.3660])
+		ActionOverride("Montaron",Face(N))
+		ApplySpellRES("bdrejuve","Montaron")
+		ChangeEnemyAlly("Montaron",NEUTRAL)
+		ChangeSpecifics("Montaron",ALLIES)
+		ActionOverride("Montaron",SetGlobal("bd_joined","locals",0))
+		ActionOverride("Montaron",SetGlobal("bd_retreat","locals",0))
+		ActionOverride("Montaron",SaveLocation("LOCALS","bd_default_loc",[350.3100]))
+		ActionOverride("Montaron",ChangeAIScript("JNMON9S",OVERRIDE)) // Montaron's SoD override script
+		ActionOverride("Montaron",ChangeAIScript("BDASC3",CLASS))
+		ActionOverride("Montaron",ChangeAIScript("BDSHOUT",RACE))
+		ActionOverride("Montaron",ChangeAIScript("BDFIGH01",GENERAL))
+		ActionOverride("Montaron",ChangeAIScript("",DEFAULT))
+		ActionOverride("Montaron",SetGlobal("BDSODXP","LOCALS",0)) // Joinxp gets set again
+		ActionOverride("Montaron",SetDialog("JNMON9"))
+		Continue()
+END
+
+// Spawn Xzar (if he & Montaron were in party in bg1 & are not dead)
+IF
+	BeenInParty("Montaron")
+	BeenInParty("Xzar")
+	!Dead("Montaron")
+	!Dead("Xzar")
+	Global("JNXZARSodSpawn","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZARSodSpawn","GLOBAL",1)
+		MoveGlobal("BD1000","Xzar",[3730.3646])
+		ActionOverride("Xzar",Face(NE))
+		ApplySpellRES("bdrejuve","Xzar")
+		ChangeEnemyAlly("Xzar",NEUTRAL)
+		ChangeSpecifics("Xzar",ALLIES)
+		ActionOverride("Xzar",SetGlobal("bd_joined","locals",0))
+		ActionOverride("Xzar",SetGlobal("bd_retreat","locals",0))
+		ActionOverride("Xzar",SaveLocation("LOCALS","bd_default_loc",[403.3118]))
+		ActionOverride("Xzar",ChangeAIScript("JNXZA9S",OVERRIDE)) //Xzar's SoD override script
+		ActionOverride("Xzar",ChangeAIScript("BDASC3",CLASS))
+		ActionOverride("Xzar",ChangeAIScript("BDSHOUT",RACE))
+		ActionOverride("Xzar",ChangeAIScript("BDMAGE01",GENERAL))
+		ActionOverride("Xzar",ChangeAIScript("",DEFAULT))
+		ActionOverride("Xzar",SetGlobal("BDSODXP","LOCALS",0)) // Joinxp gets set again
+		ActionOverride("Xzar",SetDialog("JNXZA9"))
+		SetGlobal("JNMONTSodTalk","GLOBAL",1) // talk var
+		Continue()
+END

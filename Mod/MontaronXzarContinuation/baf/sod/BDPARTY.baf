@@ -1,0 +1,75 @@
+// Montaron
+
+IF
+	Global("bd_npc_camp","locals",1)  // this is set via the kickout dialogue JNMON9P.dlg
+	Name("Montaron",Myself)
+	Switch("bd_npc_camp_chapter","global")  // check for correct camp
+	OR(2)
+	!Range("ff_camp",999) // "Name" of a trigger which detects the camps
+	!TriggerOverride("ff_camp",IsOverMe("Montaron"))
+THEN
+	RESPONSE #2
+		EscapeAreaMove("bd1000",350,3100,SSE) // coordinates as used in bd1000.baf
+	RESPONSE #3
+		EscapeAreaMove("bd7100",348,3095,12) // coordinates as used in bd7100.baf
+	RESPONSE #4
+		EscapeAreaMove("bd3000",2307,741,3) // coordinates as used in bd3000.baf
+END
+
+/* this sets the "bd_npc_camp" variable to "2" as soon as the companion is in one of the camps again: bg1000.are, bg7100.are, bd3000.are – and will make bdparty.bcs set the correct fighting script etc. */
+IF
+	GlobalLT("bd_npc_camp","locals",2)
+	Global("bd_joined","locals",0)
+	Name("Montaron",Myself)
+	TriggerOverride("ff_camp",IsOverMe("Montaron"))
+	Switch("bd_npc_camp_chapter","global")
+THEN
+	RESPONSE #2
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[350.3100]) // coordinates as used in bd1000.baf
+	RESPONSE #3
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[348.3095]) // coordinates as used in bd7100.baf
+	RESPONSE #4
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[2307.741]) // coordinates as used in bd3000.baf
+		ChangeAIScript("bdasc3",CLASS)
+END
+
+// Xzar
+
+IF
+	Global("bd_npc_camp","locals",1)  // this is set via the kickout dialogue JNMON9P.dlg
+	Name("Xzar",Myself)
+	Switch("bd_npc_camp_chapter","global")  // check for correct camp
+	OR(2)
+	!Range("ff_camp",999) // "Name" of a trigger which detects the camps
+	!TriggerOverride("ff_camp",IsOverMe("Xzar"))
+THEN
+	RESPONSE #2
+		EscapeAreaMove("bd1000",403,3118,S) // coordinates as used in bd1000.baf
+	RESPONSE #3
+		EscapeAreaMove("bd7100",321,3124,12) // coordinates as used in bd7100.baf
+	RESPONSE #4
+		EscapeAreaMove("bd3000",2314,794,4) // coordinates as used in bd3000.baf
+END
+
+/* this sets the "bd_npc_camp" variable to "2" as soon as the companion is in one of the camps again: bg1000.are, bg7100.are, bd3000.are – and will make bdparty.bcs set the correct fighting script etc. */
+IF
+	GlobalLT("bd_npc_camp","locals",2)
+	Global("bd_joined","locals",0)
+	Name("Xzar",Myself)
+	TriggerOverride("ff_camp",IsOverMe("Xzar"))
+	Switch("bd_npc_camp_chapter","global")
+THEN
+	RESPONSE #2
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[403.3118]) // coordinates as used in bd1000.baf
+	RESPONSE #3
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[321.3124]) // coordinates as used in bd7100.baf
+	RESPONSE #4
+		SetGlobal("bd_npc_camp","locals",2)
+		SaveLocation("LOCALS","bd_default_loc",[2314.794]) // coordinates as used in bd3000.baf
+		ChangeAIScript("bdasc3",CLASS)
+END

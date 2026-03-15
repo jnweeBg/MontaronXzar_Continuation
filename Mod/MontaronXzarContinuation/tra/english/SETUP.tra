@@ -1,0 +1,151 @@
+// Montaron cre strings
+@2 = ~Montaron~
+@3 = ~Keep yer distance, ye goody–goody. I no like the smell of charity.~ [jnmonim]
+@4 = ~A pox on ye! I'll no lose my neck to this lot!~ [jnmonmf]
+@5 = ~Effective. I may not kill you after all.~ [jnmonha]
+@6 = ~Ye goody goodies make me sick!~ [jnmonua]
+@7 = ~Any more of yer nice–nice and I'm gone!~ [jnmonus]
+@8 = ~I'll suffer this group no more! Best ye sleep with one eye open!~ [jnmonub]
+@9 = ~I have no equal, but I prefer to work alone.~ [jnmonle]
+@10 = ~If'n I'm not allowed to sleep, our next assailants may just live.~ [jnmonti]
+@11 = ~A good blade must be fed. Find prey or I find you.~ [jnmonbo]
+@12 = ~And the rivers run red!~ [jnmonbc]
+@15 = ~A death be in me if I no get help.~ [jnmonhu]
+@16 = ~I hate the woods. Prey be so much easier to find in the city.~ [jnmonfo]
+@18 = ~Dungeons! The dark be nice, but blast this damp!~ [jnmondu]
+@19 = ~I be much preferring the cover of night o'er this blasted daylight!~ [jnmonday]
+@21 = ~Ye spoke at me?~ [jnmons1]
+@22 = ~This better be good.~ [jnmons2]
+@23 = ~What need ye dead?~ [jnmons3]
+@24 = ~I'll do yer toil.~ [jnmona1]
+@25 = ~Go suck yer blade.~ [jnmona2]
+@26 = ~Sleep lightly, taskmaster.~ [jnmona3]
+@27 = ~I warrant your attention?! Oh frabjous day, callooh callay!~ [jnmona4]
+@28 = ~Arrrr!~ [jnmona5]
+@29 = ~Leave me be, lest your head leave yer neck.~ [jnmona6]
+@30 = ~What part of "I'm a loner" do ye not understand?!~[jnmona7]
+@31 = ~Good or bad, you'll go the way of all flesh.~ [jnmons4]
+@32 = ~'Tis a wonder you've lived as long as ye have.~ [jnmons5]
+@33 = ~The smell of flesh!~ [jnmonch]
+@34 = ~~ [jnmoncm]
+@35 = ~Yer wit be as sharp as my blade.~ [jnmonwi]
+@36 = ~My equal is a talent of many men.~ [jnmonpp]
+@37 = ~All of them fools.~ [jnmonts]
+@38 = ~Do not make light of me.~ [jnmonhs]
+@39 = ~Soo stupid!~ [jnmonsf]
+@40 = ~When asked about his past, Montaron openly threatens you with bodily harm. He seems quite dangerous, and more than willing to engage in gratuitous violence. It would appear that he cares little for life, including his own.
+He works grudgingly with Xzar, even though he obviously despises the man. Whoever their employers are, they must be powerful indeed. These two would likely kill each other without a presence over their heads preventing it. Montaron might be willing to discuss the whole matter with you, but you get the feeling that you probably would not wake up the next morning.~
+
+// Vesper cre strings
+@50 = ~Vesper~
+@51 = ~Oh, my life is in shambles.~ [JNLOT02]
+
+// Second Encounter cre strings
+@60 = ~Davron~
+@61 = ~Zhentarim Mage~
+
+// Item strings
+
+@200 = ~Montaron's Dagger~
+@201 = ~This is one of Montaron's "tools", as he calls them lovingly.
+
+STATISTICS:
+
+Requires:
+ 3 Strength
+
+Weight: 2~
+
+@202 = ~This is one of Montaron's "tools", as he calls them lovingly.
+
+STATISTICS:
+
+Combat abilities:
+– Hit target suffers 2 point of poison damage per second for 5 seconds (Save vs. Poison negates)
+
+THAC0: +3
+Damage: 1d4+1 (piercing)
+Speed Factor: 0
+Proficiency Type: Dagger
+Type: One–handed
+Requires:
+ 3 Strength
+
+Weight: 2~
+
+@210 = ~Harper Orders~
+
+@211 = ~This was the fool trying to spy on us, exactly how we planned it. According to our information he is not too high up in the Zhentarim and we only needed him to get to his partner, who is likely dead as you read this. Make sure to dump his body far out in the sea, since we saw no need to take extra measures ensuring he won't come back.
+
+R.~
+
+@220 = ~Black Cloak~
+
+@221 = ~Veil of the Untraceable~
+
+@222 = ~This cloak is remarkably unnoticeable – almost suspiciously so. Merely looking at it is discomforting, as if the cloak itself tries to slip from your vision, resisting your gaze.
+
+STATISTICS:
+
+Weight: 3~
+
+@223 = ~This cloak has passed through the hands of many within the Zhentarim, also known as the Black Network. Its original creator is unknown, and the magical protections woven into it have been added gradually over time, often at the behest of new owners. Each addition was designed to aid spies and assassins, making the wearer, as its name suggests, truly untraceable – even by magical means.
+
+STATISTICS:
+
+Equipped abilities:
+– Hide in Shadows: +50%
+– Move Silently: +50%
+– Detect Illusion: +25%
+– While hidden or invisible, the wearer is non–detectable by magical means such as Detect Invisibility
+– Saving Throws vs Death: +2
+
+Charge abilities:
+– Improved Invisibility three times per day
+  Duration: 23 rounds
+  Area of Effect: The user
+  
+– Mirror Image three times per day
+  Duration: 23 rounds
+  Area of Effect: The user
+
+Weight: 3~
+
+// ToB Epilogue
+@500 = ~After parting with <CHARNAME>, Montaron disappeared for a time. Soon, the Zhentarim began to suffer losses, their deaths carried out by an almost invisible force. This new enemy cared nothing for riches or power and if his true intentions were anything besides carnage is difficult to discern. When it became apparent that Montaron was responsible, he had already vanished, seemingly disappeared from the world. Those few who catch a glimpse of the solitary halfling living alone, far from civilization — even finding faith in Eldath, the goddess of stillness — would never guess his past. Now only the future will tell if Montaron's change is genuine enough to escape the fate of the faithless.~
+@501 = ~After parting with <CHARNAME>, Montaron returned to Athkatla. There he founded a new guild to rival the Shadow Thieves and the Harpers in the city. Quickly he and his guild became the most fearsome in the city and while the Harpers and Shadow Thieves in the city had their numbers thinned Montaron's influence only grew. But it was not long before more and more powerful entities were made aware to the cruelty emanating from Montaron and his guild. After just one year in the city Montaron and his followers were rooted out by fighters and adventurers of great skill and renown. Whether Montaron is still alive and where he might be, is unknown — that is likely how he prefers it. What is certain, though, is that not even the consequences of his actions in death could make Montaron change his cruel ways.~
+
+// EET Dialogue
+@600 = ~Bring me Montaron, the fighter/thief.~
+
+// Components & Install process
+@1000 = ~Montaron & Xzar for SoD~
+@1001 = ~Component is only  available for Baldur's Gate Enhanced Edition with SoD installed (or EET)~
+@1002 = ~Please install the DLC merger, before installing any mod for Baldur's Gate Enhanced Edition~
+@2000 = ~Montaron for Baldur's Gate II Enhanced Edition~
+@2001 = ~Component is only available for Baldur's Gate II Enhanced Edition (or EET)~
+@2002 = ~This mod needs to be installed before EET_End on your EET install~
+@2101 = ~Component is only available for EET~
+@2102 = ~Component requires main component to be installed~
+@3000 = ~Realistic sharper portrait for Xzar and Montaron (by NolSol on NexusMods)~
+@3001 = ~Component is only available for Baldur's Gate I or II Enhanced Edition  (or EET)~
+@4000 = ~Portraits for new NPCs (besides Montaron)~
+@4001 = ~Component is only available for Baldur's Gate II Enhanced Edition (or EET)~
+
+// Journal Entries (1.000.000++)
+@1000002 = ~Montaron's Equipment
+
+Montaron lost all of his equipment when he died to the Harpers.
+Now we need to go to his and Xzar's old base in the Docks to get one of his tools he stashed there.~
+
+//Evil
+@1000003 = ~Montaron's Equipment
+
+Upon entering Xzar's old base we walked into a Zhentarim Thief looting the place.
+We killed the Thief and retrieved Montaron's Dagger.~
+
+// Good
+@1000004 = ~Montaron's Equipment
+
+Upon entering Xzar's old base we walked into a Zhentarim Thief looting the place.
+We let the Thief go upon taking Montaron's Dagger from him.~

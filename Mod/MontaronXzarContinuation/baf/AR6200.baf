@@ -1,0 +1,33 @@
+// JNMONTGoodEnding = 1 -> good ending & != 1 -> "normal" ending
+// good ending
+IF
+Global("StartEndBios","AR6200",1)
+InParty("JNMONT")
+OR(2)
+GlobalLT("JNMONTBadEnding","GLOBAL",1)
+GlobalGT("JNMONTGoodEnding","GLOBAL",1)
+Global("JNMONTBio","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("JNMONTBio","GLOBAL",1)
+TextScreen("JNMON01")
+SmallWait(1)
+Continue()
+END
+
+
+// "Normal" evil ending
+IF
+Global("StartEndBios","AR6200",1)
+InParty("JNMONT")
+OR(2)
+GlobalLT("JNMONTGoodEnding","GLOBAL",2)
+GlobalGT("JNMONTBadEnding","GLOBAL",0)
+Global("JNMONTBio","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("JNMONTBio","GLOBAL",1)
+TextScreen("JNMON02")
+SmallWait(1)
+Continue()
+END

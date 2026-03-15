@@ -1,0 +1,171 @@
+/* =====================================
+============ Interceptions =============
+===================================== */
+
+@1000 = ~You are a...~
+@1001 = ~I have no time for yer nonsense. Quit babbling lest I cut yer tongue.~
+@1002 = ~A boy once had parents so cruel,
+They twisted his mind as a rule.
+In shadows he grew,
+With darkness he flew,
+Now mischief and death are his tools.~
+@1003 = ~Shut yer trap, madman.. or you will get to see me tools soon enough.~
+@1004 = ~Ye make for a powerful ally <CHARNAME>. Our foes will tremble when they see yer true form!~
+@1005 = ~Ribald Barterman at yer-~
+@1006 = ~You dare come into my shop. Yer mage friend made off with some of my stock!~
+@1007 = ~Pah. Yer mage be lying in the street, so he will no pay ye anytime soon.~
+@1008 = ~Ye see yer mage 'round? Me neither, so bother me no more and sell yer goods.~
+@1009 = ~*sigh* Nothing I can do I suppose. Now where was I..~
+@1010 = ~Another madman! Let's get to cuttin' <CHARNAME>!~
+@1011 = ~As if not enough loonies are running the place! Next time I'll no wait for ye to start cuttin'.~
+@1012 = ~Ye seem to be in luck <CHARNAME>. This be the place to make some gold for us.~
+@1013 = ~I'll turn yer prattle into screams, loudmouth!~
+@1014 = ~Bring it on then!~
+@1015 = ~This better be the last whining lass we be hearin' out.~
+@1016 = ~Ye be scared by a little boys ghost? Har har.. waste of air ye are.~
+@1017 = ~There better be some money in those slavers coffers. I'll no work for free.~
+@1018 = ~Ye harpers just can not mind yer own business.. it'll bite ye all sooner or later.~
+@1019 = ~Think again <CHARNAME>. Ye miss on this, ye miss out on lots of gold, I be sure!~
+@1020 = ~Having the Shadow Thieves with us, we'll be rich in no time. Or maybe we'll just take over this place. Either way ye made a good choice for once <CHARNAME>.~
+@1021 = ~How've ye found me, ye nosy lot! Ye killed me once, I'll no let ye again!~
+@1022 = ~Whoever you are, you are of no concern to us. We're here for someone who was once one of our own.~
+@1023 = ~How's it feel to be on the receiving end, Jaheira? It'll feel better when their dead though, heh!~
+@1024 = ~So this be the competition to the Shadow Thieves. We save gold and ally with the stronger side - an easy choice I say.~
+@1025 = ~If yer caught, ye deserve what's comin' to ye.~
+@1026 = ~So you say, your death was deserved.~
+@1027 = ~No, that's not.. That's not what I mean, ye.. *hrmpf* Arrr!~
+@1028 = ~I knew it! We should've taken the other side, I told ye <CHARNAME>.~
+@1029 = ~Why ye'd lock these loonies away to study them, I've no idea. Just cut 'em down.~
+@1030 = ~Heh! Ye best pray that yer friends win here, or ye'll find a blade in yer spine soon 'nough.~
+@1031 = ~A fool he be! And a dead one soon too, spill his guts on the floor I say!~
+@1032 = ~A more foolish plan I've never heard. We be strong <CHARNAME>, we'll crush that wizard, just after we spill this one's blood!~
+@1033 = ~Arrr! Why ye let him flee!~
+@1034 = ~Precisely. Why are we standing 'ere talkin' to fish people? Carve out his heart and be done with it!~
+@1035 = ~Do it <CHARNAME>. Me blade needs to be fed.~
+@1036 = ~They left us to rot in there! Let's pay'em back with a blade through the belly!~
+@1037 = ~Ye're mad <CHARNAME>. Now we'll have to kill a bunch of mad wizards after we've dealt with Irenicus.~
+@1038 = ~Montaron, the surprisingly bloodthirsty halfling, who proved himself effective over and over, even if just for the blood and gold.~
+@1039 = ~Montaron, Irenicus is powerful, you've seen it yourself. If you want to leave, now might be the time.~
+@1040 = ~Montaron, I am sure you will find riches through some thieves guild. You don't need to follow me into this battle.~
+@1041 = ~Are you ready to fight, Montaron? I need to be sure you will fight with me to the end.~
+@1042 = ~I'll no miss a chance to push me blade into a wizard's spine. 'sides the gold I make with ye, I'll not find anywhere else.~
+@1043 = ~Greetings, my lord. I am Madame Nin, and I am here to ensure you are pleasantly accompanied. Are you interested in companionship, my lord?~
+@1044 = ~I've no interest in any of yer business. Cuttin' down one o' yers is to easy to be fun.~
+@1045 = ~We do no such thing here! You better leave or I call the guards.~
+@1046 = ~Ye scum! None betray me and live! I'll have yer hide!~
+@1047 = ~Only good wizard, be a dead wizard. Now have ye back yer powers <CHARNAME>?~
+@1048 = ~Blasted be ye for bringing back 'ere! I'll no let this be my end, so ye better make haste out of here!~ [jnmonmf]
+@1049 = ~How often'll I be carvin' ye till ye stay dead wizard? 'twas fun once, but now it be gettin' tedious.~
+@1050 = ~Edwin! 'nother madman in a robe! Let's do our job 'ere and get out!~
+
+/* =====================================
+========== Talk with Montaron ==========
+===================================== */
+
+// Urge to visit Xzar talks
+@1 = ~<CHARNAME>! Ye promised me a dead lunatic.~
+@2 = ~Show him or you will take his place.~
+@3 = ~I'll no be played by ye any longer <CHARNAME>! You're lucky my dagger isn't with me.~
+@4 = ~I be tellin' you to make way to Xzar or ye'll not have my company for much longer.~
+@5 = ~Oh, what a dreadful future! To not have some bloodthirsty imbecile at our backs..~
+@6 = ~Shut it cretin! If I no see a dead green wizard, a red one will have to do.~
+@7 = ~Then let us make haste to some loons corpse at once <CHARNAME>. Before I have to relieve us of this cur.~
+@8 = ~I see now that ye're nothing, but a lying coward <CHARNAME>. I've no need of ye and yer lot anyway!~
+@9 = ~Why you've even been dragging him along in the first place is a mystery to me.~
+@10 = ~Anyways.. good riddance to bad rubbish.~
+
+// Talk on Xzar's Deathplace
+@11 = ~You weren't lying after all. The madman truly be dead! A most joyous day!~
+@12 = ~One lunatic less <CHARNAME> can take in <PRO_HISHER> company.~
+@13 = ~Xzar wanted us to rescue you, he cared for you. How can you be so cold towards his death?~
+@14 = ~Pah! In me partnership with the mad wizard I killed many.. but no kill was as tempting as the madman himself.~
+@15 = ~If only my boss hadn't took a liking to him.~
+@16 = ~Now let us talk about the future <CHARNAME>.~
+@17 = ~The killing in yer company be nice. Now that I'm finally relieved of my "partner" we can join up as long as ye prove effective.~
+@18 = ~If I remember correctly ye've lots of enemies as always <CHARNAME>? If the loot be as nice as always, I'll do what I do best for ye again.~
+@19 = ~His partner lies dead besides us and he shows nothing but joy. Think <CHARNAME>. Why would we be any different to him?~
+@20 = ~Wasn't Xzar your partner? Why are you happy about his death?~
+@21 = ~Very well. Let us waste no more time and get going.~
+@22 = ~Har HAR there Montaron! Let's move then, eh, chum?~
+@23 = ~On second thought. I will sleep better without you in my company.~
+@24 = ~Enough talk of Xzar now! Let us find some prey for me blade.~
+@25 = ~Agreed. First thing, we should get one o' me tools from my old hideout quickly. It is right around here.~
+@26 = ~I will not stand for this. Trusting this vile creature at our backs is madness!~
+@27 = ~I must ask you to reconsider your decision or I am forced to abandon your cause.~
+@28 = ~Right you are, Sir Keldorn. I was a fool not to see the obvious. You're on your own Montaron. Leave us at once.~
+@29 = ~My decision is final. It might not seem wise to you Keldorn, but I ask you to trust me for now.~
+@30 = ~That's too bad then old man. If you force me to choose, you loose.~
+@31 = ~A fool ye are, following the advice of an old man, blinded by some order.~
+@32 = ~My work is better done without yer interference anyways.~
+@33 = ~You chose right <CHARNAME>. For this I will turn a blind eye to your ealier ignorance, but in the future I expect you to follow the noble and righteous path.~
+@34 = ~Your new associate makes it hard, but I have yet to find reason not to trust you. I will give him a chance to show his worth, for now.~
+@35 = ~Then shut yer trap old man and get going already.~
+@36 = ~You test my patience halfman! <CHARNAME>'s word only holds my hand for so long.~
+@37 = ~No <CHARNAME>. Your indecision towards him is enough to show, that only one of us strives for righteousness. You will have to go on without me.~
+@38 = ~Tell your sermons to the other fools in your order, old man. I've no need for prayers, my skills be enough as is.~
+@39 = ~There will come a time when you will regret your choices in life <CHARNAME>.~
+@40 = ~May we never meet again, though if we should, I reckon it will be at odds.~
+@41 = ~I await the day me blade spills yer blood old fool. Better be runnin' while ye're able.~
+@42 = ~I'll be damned! This be the last time ye ever recite the madman or next time I'll make sure it is.~
+@43 = ~Oh, come on, Montaron. Must you be so moody all the time.~
+@44 = ~A madman ye are! May ye suffer for all eternity, prat!~
+@45 = ~Have you truly gone mad <CHARNAME>? Did we bring the Zhent spy back just for your amusement? I hope you advise with me, the next time you have a similar idea.~
+@46 = ~Find someone else to do yer killin' then. My work be better done alone anyway.~
+
+// Underdark Talk
+@47 = ~This be a nice place <CHARNAME>. Why not stay down here, where no daylight can reach us.~
+@48 = ~Of course you say that, iblith. You wouldn't last a minute down here alone. You're nothing compared to the drow, pathetic halfman.~
+@49 = ~Don't you listen to him <CHARNAME>. Nothing good can come of us being down here.~
+@50 = ~Shut yer trap girl! Yer whining makes me sick.~
+@51 = ~I will be grateful when we are out of here and back under the sun. You truly need to find peace and balance in your heart, if you despise the daylight so much, you'd rather stay in this place.~
+@52 = ~Go find me some balance then and stop bothering me, dirtlover.~
+@53 = ~I'll not stay down here a second longer than needed.~
+@54 = ~It is indeed nice down here, but I have to chase after Irenicus.~
+@55 = ~I have important things to worry about, I have no time to talk to you.~
+@56 = ~A pity. There is so much potential down here.~
+@57 = ~Don't you understand? Down here you're nothing special. You're just prey for your betters.~
+@58 = ~I have no equal! Your people will learn to fear me in time.~
+@59 = ~Why is confidence always wasted on those small of mind..~
+@60 = ~I will bring death upon yer wizard soon enough. And then I'll return down here.~
+@61 = ~I knew you're mad, halfman, but this is a new low. Even for you. Why we still drag this scum along I can't begin to understand, <CHARNAME>.~
+@62 = ~Fine by me. Just make sure there be prey around.~
+
+// Talk after killing Vesper (the Zhent Thief)
+@63 = ~Finally me dagger is in my hands again!~
+@64 = ~That thief. He didn't have to die.~
+@65 = ~What was that about your boss?~
+@66 = ~I'm glad you're happy. Now let us move on.~
+@67 = ~Saved us the touble of dealing with my boss.~
+@68 = ~Who is your boss?~
+@69 = ~Doesn't matter. He'll never know I'm still alive, so let's stop wasting time and move onwards, 'fore ye annoy me again.~
+@70 = ~Thanks to yer foolishness you'll likely meet him soon enough. Now get a move on 'fore ye annoy me even more!~
+@71 = ~Agreed.~
+
+
+// Talk over MaeVar
+@72 = ~This Mae'Var fella seems smart. A pity he's to be done soon.~
+@73 = ~He is a cruel man and needs to be stopped.~
+@74 = ~Taking Renals side is an easy choice, as he is higher in the guild.~
+@75 = ~I agree, but going against Renal is a bad idea for anyone.~
+@76 = ~I have no time for your scheming, we will resolve this quickly and be done with it.~
+@77 = ~Aren't ye a goodie goodie. Though ye are right to ally the more powerful side, so I'll no complain.~
+@78 = ~I'll no argue that. Let us finish our work quickly, then.~
+@79 = ~Right ye are. So we best not plot against Renal, at least for now.~
+@80 = ~Scheming? No. Killing Mae'Var is the only way, don't ye worry 'bout it.~
+
+// Talk about Davron
+@90 = ~Finally! A quick death be to good for him, but he'll never bother me again!~
+@91 = ~His cloak always catched my eye, let's take a look at it.~
+@92 = ~We stopped a high ranking member of the Black Network, I am sure. We have done good today, <CHARNAME>.~
+@93 = ~Will there be more Zhentarim coming after us in the future?~
+@94 = ~Why was he so angry about Xzar?~
+@95 = ~I'm glad you're happy, but we can't stand around for long.~
+@96 = ~Agreed, let's get a move on.~
+@97 = ~I doubt it. I can no imagine Davron was allowed to chase after us down 'ere. He was actin' on his own, I'm sure.~
+@98 = ~That's good to know. Now let's move on.~
+@99 = ~Fine by me.~
+@100 = ~He always liked to watch the lunatic kill his partner, sometimes by accident. He put me on a job with Xzar for years, 'cause he thought it funny.~
+@101 = ~Also Xzar's been in the Zhentarim for a long time and got job after job done, even 'fore he had me. I know not how, but that be the past and I'll no longer waste thought on the madman.~
+@102 = ~A pity Xzar is dead. He might have been useful.~
+@103 = ~Then ye've not known Xzar. Oh, even thinkin' o' him gets me to plant a dagger in someone.~
+@104 = ~Enough talking then. Let's move on.~

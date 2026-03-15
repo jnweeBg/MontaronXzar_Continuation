@@ -1,0 +1,67 @@
+// Montaron comment on Skie's murder low rep
+IF
+	Global("bd_plot","global",591)
+	!GlobalTimerNotExpired("bd_mdd1352_ot_timer","bd4100")
+	Global("JNMONT_SoDMurderAccusations","bd4100",0)
+	ReputationLT(Player1,10)
+	IsValidForPartyDialogue("Montaron")  
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT_SoDMurderAccusations","bd4100",1)
+	RESPONSE #100
+		SetGlobal("JNMONT_SoDMurderAccusations","bd4100",1)
+		SetGlobalTimer("bd_mdd1352_ot_timer","bd4100",ONE_ROUND)
+		DisplayStringHead("Montaron",@0) /* Hah, ye finally put a stop to that annoyin' brat. */
+		Continue()
+END
+
+// Montaron comment on Skie's murder high rep
+IF
+	Global("bd_plot","global",591)
+	!GlobalTimerNotExpired("bd_mdd1352_ot_timer","bd4100")
+	Global("JNMONT_SoDMurderAccusations","bd4100",0)
+	!ReputationLT(Player1,10)
+	IsValidForPartyDialogue("Montaron")  
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT_SoDMurderAccusations","bd4100",1)
+	RESPONSE #100
+		SetGlobal("JNMONT_SoDMurderAccusations","bd4100",1)
+		SetGlobalTimer("bd_mdd1352_ot_timer","bd4100",ONE_ROUND)
+		DisplayStringHead("Montaron",@1) /* Ye've it in ye after all. Well done <CHARNAME>, let the streets run red. */
+		Continue()
+END
+
+// Xzar comment on Skie's murder low rep
+IF
+	Global("bd_plot","global",591)
+	!GlobalTimerNotExpired("bd_mdd1352_ot_timer","bd4100")
+	Global("JNXZAR_SoDMurderAccusations","bd4100",0)
+	ReputationLT(Player1,10)
+	IsValidForPartyDialogue("Xzar")  
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_SoDMurderAccusations","bd4100",1)
+	RESPONSE #100
+		SetGlobal("JNXZAR_SoDMurderAccusations","bd4100",1)
+		SetGlobalTimer("bd_mdd1352_ot_timer","bd4100",ONE_ROUND)
+		DisplayStringHead("Xzar",@2) /* Ahh... the sweet release of death delivered by <CHARNAME> <PRO_HIMHER>self. */
+		Continue()
+END
+
+// Xzar comment on Skie's murder high rep
+IF
+	Global("bd_plot","global",591)
+	!GlobalTimerNotExpired("bd_mdd1352_ot_timer","bd4100")
+	Global("JNXZAR_SoDMurderAccusations","bd4100",0)
+	!ReputationLT(Player1,10)
+	IsValidForPartyDialogue("Xzar")  
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_SoDMurderAccusations","bd4100",1)
+	RESPONSE #100
+		SetGlobal("JNXZAR_SoDMurderAccusations","bd4100",1)
+		SetGlobalTimer("bd_mdd1352_ot_timer","bd4100",ONE_ROUND)
+		DisplayStringHead("Xzar",@3) /* Murder an innocent girl? Oh, you have tricked us all.. or you were tricked.. tricked by me? No, I wouldn't... */
+		Continue()
+END

@@ -1,0 +1,51 @@
+// Montaron was left in hell
+IF
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNMONT_kicked_bd4700","global",1) // set in JNMON9P.dlg
+	!Dead("Montaron")
+	!InParty("Montaron")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		MoveGlobal("bd4300","Montaron",[451.347]) // coordinates above the portal
+		ActionOverride("Montaron",Face(SE))
+END
+
+// Montaron was left somewhere else
+IF
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNMONT_kicked_bd4700","global",0)
+	!Dead("Montaron")
+	!InParty("Montaron")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		MoveGlobal("bd4300","Montaron",[848.856])
+		ActionOverride("Montaron",Face(S))
+END
+
+// Xzar was left in hell
+IF
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNXZAR_kicked_bd4700","global",1) // set in JNMON9P.dlg
+	!Dead("Xzar")
+	!InParty("Xzar")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		MoveGlobal("bd4300","Xzar",[493.319]) // coordinates above the portal
+		ActionOverride("Xzar",Face(SE))
+END
+
+// Xzar was left somewhere else
+IF
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNXZAR_kicked_bd4700","global",0)
+	!Dead("Xzar")
+	!InParty("Xzar")
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		MoveGlobal("bd4300","Xzar",[806.883])
+		ActionOverride("Xzar",Face(SE))
+END

@@ -1,0 +1,471 @@
+BACKUP ~weidu_external/backup/MontaronXzarExpansion~
+AUTHOR ~jnwee (janwburner@gmail.com)~
+VERSION ~v1.0~
+AUTO_EVAL_STRINGS
+AUTO_TRA ~%MOD_FOLDER%/tra/%s~
+README ~%MOD_FOLDER%/README.html~
+
+// EET Chapter handling
+ALWAYS
+  ACTION_IF NOT VARIABLE_IS_SET bg2_chapter BEGIN
+    ACTION_IF GAME_IS ~eet~ BEGIN
+      OUTER_SET bg2_chapter = 12 // EET uses continuous chapter numbering from BG1 through TOB and this starts at "12" in BGII
+    END ELSE BEGIN
+      OUTER_SET bg2_chapter = 0 // all other game types (BGII(:EE), BGT) restart chapter numbering in SOA
+    END
+    OUTER_FOR (i=1; i<=10; i=i+1) BEGIN
+      OUTER_SET bg2_chapter = bg2_chapter + 1
+      OUTER_SPRINT name_source ~bg2_chapter_%i%~
+      OUTER_SET EVAL ~%name_source%~ = bg2_chapter
+    END
+  END
+END
+
+LANGUAGE 
+    ~english~
+    ~english~
+    ~%MOD_FOLDER%/tra/english/SETUP.tra~
+	
+BEGIN @1000 DESIGNATED 1000
+REQUIRE_PREDICATE (GAME_IS ~bgee eet~ AND FILE_EXISTS_IN_GAME ~bd0103.are~) @1001
+FORBID_COMPONENT ~EET_end.tp2~ ~0~ @2002
+FORBID_COMPONENT ~EET_end.tp2~ ~1~ @2002
+
+// check for mod merger
+ACTION_IF ((FILE_EXISTS ~dlc/sod-dlc.zip~) OR (FILE_EXISTS ~sod-dlc.zip~)) THEN BEGIN
+	FAIL @1002
+END
+
+// Copy new sounds over
+COPY ~%MOD_FOLDER%/tra/%LANGUAGE%/sound~ ~override~
+
+// Add a couple new sounds to Montaron
+ACTION_FOR_EACH creature IN montar montar2 montar4 montar6 BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%creature%.cre~ THEN BEGIN
+		COPY_EXISTING ~%creature%.cre~ ~override~
+			SAY SELECT_RARE1 @31 /* Good or bad, you'll go the way of all flesh. */
+			SAY SELECT_RARE2 @32 /* 'Tis a wonder you've lived as long as ye have. */
+			SAY CRITICAL_HIT @33 /* The smell of flesh! */
+			SAY CRITICAL_MISS @34 /* some moan */
+			SAY TARGET_IMMUNE @35 /* Yer wit be as sharp as my blade. */
+			SAY PICKED_POCKET @36 /* My equal is a talent of many men. */
+			SAY SET_A_TRAP @37 /* All of them fools! */
+			SAY HIDDEN_IN_SHADOWS @38 /* Do not make light of me. */
+			SAY SPELL_DISRUPTED @39 /* Soo stupid! */
+
+	END
+END
+
+COMPILE EVALUATE_BUFFER ~%MOD_FOLDER%/dlg/sod/JNMON9.d~
+	~%MOD_FOLDER%/dlg/sod/JNBDMO.d~
+	~%MOD_FOLDER%/dlg/sod/JNXZA9.d~
+	~%MOD_FOLDER%/dlg/sod/JNBDXZ.d~
+	
+	~%MOD_FOLDER%/baf/sod/JNMON9S.baf~
+	~%MOD_FOLDER%/baf/sod/JNXZA9S.baf~
+	
+// XP set script added to override script
+EXTEND_BOTTOM ~JNMON9S.bcs~ ~%MOD_FOLDER%/baf/sod/general_script_additions.baf~
+	EVALUATE_BUFFER
+
+EXTEND_BOTTOM ~JNXZA9S.bcs~ ~%MOD_FOLDER%/baf/sod/general_script_additions.baf~
+	EVALUATE_BUFFER
+
+// Spawn script in the first camp area
+EXTEND_TOP ~BD1000.bcs~ ~%MOD_FOLDER%/baf/sod/BD1000.baf~
+	EVALUATE_BUFFER
+	
+// Move script in the second camp area
+EXTEND_TOP ~BD7100.bcs~ ~%MOD_FOLDER%/baf/sod/BD7100.baf~
+	EVALUATE_BUFFER
+	
+COPY_EXISTING ~BD7100.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		SPRINT textToReplace ~\(SetGlobal("bd_move_npcs","bd7100",1)\)~
+		COUNT_REGEXP_INSTANCES ~%textToReplace%~ num_matches
+		PATCH_IF (num_matches > 0) BEGIN
+			REPLACE_TEXTUALLY ~%textToReplace%~ ~\1 SetGlobal("JNMONT_MoveCamp","MYAREA",1) SetGlobal("JNXZAR_MoveCamp","MYAREA",1)~ 
+			PATCH_PRINT ~Patching: %num_matches% matches found in %SOURCE_FILESPEC% for REPLACE_TEXTUALLY: %textToReplace%~
+		END ELSE BEGIN
+			PATCH_WARN ~WARNING: could not find %textToReplace% in %SOURCE_FILESPEC%~
+		END
+	END
+BUT_ONLY
+
+// Move script in the third camp area
+EXTEND_TOP ~BD3000.bcs~ ~%MOD_FOLDER%/baf/sod/BD3000.baf~
+	EVALUATE_BUFFER
+
+COPY_EXISTING ~BD3000.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		SPRINT textToReplace ~\(SetGlobal("bd_move_npcs","bd3000",1)\)~
+		COUNT_REGEXP_INSTANCES ~%textToReplace%~ num_matches
+		PATCH_IF (num_matches > 0) BEGIN
+			REPLACE_TEXTUALLY ~%textToReplace%~ ~\1 SetGlobal("JNMONT_MoveCamp","MYAREA",1) SetGlobal("JNXZAR_MoveCamp","MYAREA",1)~ 
+			PATCH_PRINT ~Patching: %num_matches% matches found in %SOURCE_FILESPEC% for REPLACE_TEXTUALLY: %textToReplace%~
+		END ELSE BEGIN
+			PATCH_WARN ~WARNING: could not find %textToReplace% in %SOURCE_FILESPEC%~
+		END
+	END
+BUT_ONLY
+
+// Crusade Battle Script
+EXTEND_BOTTOM ~bdasc3.bcs~ ~%MOD_FOLDER%/baf/sod/BDASC3.baf~
+	EVALUATE_BUFFER
+	
+COPY_EXISTING ~bd3000.BCS~ ~override~
+	DECOMPILE_AND_PATCH BEGIN
+		SPRINT textToReplace ~\(SetGlobal("bd_move_voghiln","bd3000",0)\)~
+		COUNT_REGEXP_INSTANCES ~%textToReplace%~ num_matches
+		PATCH_IF (num_matches > 0) BEGIN
+			REPLACE_TEXTUALLY ~%textToReplace%~ ~\1 SetGlobal("JNMONT_MoveCamp","MYAREA",0) SetGlobal("JNXZAR_MoveCamp","MYAREA",0)~ 
+			PATCH_PRINT ~Patching: %num_matches% matches found in %SOURCE_FILESPEC% for REPLACE_TEXTUALLY: %textToReplace%~
+		END ELSE BEGIN
+			PATCH_WARN ~WARNING: could not find %textToReplace% in %SOURCE_FILESPEC%~
+		END
+	END
+BUT_ONLY
+
+// script to return home when kicked out
+EXTEND_TOP ~bdparty.bcs~ ~%MOD_FOLDER%/baf/sod/BDPARTY.baf~
+  EVALUATE_BUFFER
+  
+// script to move Montaron & Xzar to the portal in hell, if they are left behind
+EXTEND_TOP ~bdcut58.bcs~ ~%MOD_FOLDER%/baf/sod/BDCUT58.baf~
+	EVALUATE_BUFFER
+
+// script to move Montaron & Xzar into the Dragonspear Castle Basement at the end
+EXTEND_TOP ~bdcut59b.bcs~ ~%MOD_FOLDER%/baf/sod/BDCUT59B.baf~
+	EVALUATE_BUFFER
+	
+// script for displaying comments on skie's murder
+EXTEND_TOP ~bd4100.bcs~ ~%MOD_FOLDER%/baf/sod/BD4100.baf~
+	EVALUATE_BUFFER
+
+// script to leave party after skie's murder
+EXTEND_TOP ~bdcut61.bcs~ ~%MOD_FOLDER%/baf/sod/BDCUT61.baf~
+	EVALUATE_BUFFER
+
+BEGIN @2000 DESIGNATED 2000
+REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @2001
+FORBID_COMPONENT ~EET_end.tp2~ ~0~ @2002
+FORBID_COMPONENT ~EET_end.tp2~ ~1~ @2002
+
+ACTION_IF GAME_IS ~eet~ BEGIN
+	OUTER_SPRINT jnmontdv ~Montaron~
+END ELSE BEGIN
+	OUTER_SPRINT jnmontdv ~JNMONT~
+END
+
+COPY ~%MOD_FOLDER%/tra/%LANGUAGE%/sound~ ~override~
+
+COPY ~%MOD_FOLDER%/cre/JNMONT.cre~ ~override/JNMONT.cre~
+	SAY NAME1 @2 /* Montaron */
+	SAY NAME2 @2 /* Montaron */
+	SAY INITIAL_MEETING @3 /* Keep yer distance, ye goody-goody. I no like the smell of charity. */
+	SAY MORALE @4 /* A pox on ye! I'll no lose my neck to this lot! */
+	SAY HAPPY @5 /* Effective. I may not kill you after all. */
+	SAY UNHAPPY_ANNOYED @6 /* Ye goody goodies make me sick! */ 
+	SAY UNHAPPY_SERIOUS @7 /* Any more of yer nice-nice and I'm gone! */
+	SAY UNHAPPY_BREAKING @8 /* I'll suffer this group no more! Best ye sleep with one eye open! */
+	SAY LEADER @9 /* I have no equal, but I prefer to work alone. */
+	SAY TIRED @10 /* If'n I'm not allowed to sleep, our next assailants may just live. */
+	SAY BORED @11 /* A good blade must be fed. Find prey or I find you. */
+	SAY BATTLE_CRY1 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY2 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY3 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY4 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY5 @12 /* And the rivers run red! */
+	SAY DAMAGE ~~ [JNmonda]
+	SAY DYING ~~ [JNmondy]
+	SAY HURT @15 /* A death be in me if I no get help. */
+	SAY AREA_FOREST @16 /* I hate the woods. Prey be so much easier to find in the city. */
+	SAY AREA_DUNGEON @18 /* Dungeons! The dark be nice, but blast this damp! */
+	SAY AREA_DAY @19 /* I be much preferring the cover of night o'er this blasted daylight! */
+	SAY SELECT_COMMON1 @21 /* Ye spoke at me? */
+	SAY SELECT_COMMON2 @22 /* This better be good */
+	SAY SELECT_COMMON3 @23 /* What need ye dead? */
+	SAY SELECT_COMMON4 @21 /* Ye spoke at me? */
+	SAY SELECT_COMMON5 @22 /* This better be good */
+	SAY SELECT_COMMON6 @23 /* What need ye dead? */
+	SAY SELECT_ACTION1 @24 /* I'll do yer toil. */
+	SAY SELECT_ACTION2 @25 /* Go suck yer blade. */
+	SAY SELECT_ACTION3 @26 /* Sleep lightly, taskmaster. */
+	SAY SELECT_ACTION4 @27 /* I warrant your attention?! Oh frabjous day, callooh callay! */
+	SAY SELECT_ACTION5 @28 /* Arrrr! */
+	SAY SELECT_ACTION6 @29 /* Leave me be, lest your head leave yer neck. */
+	SAY SELECT_ACTION7 @30 /* What part of "I'm a loner" do ye not understand?! */
+	SAY SELECT_RARE1 @31 /* Good or bad, you'll go the way of all flesh. */
+	SAY SELECT_RARE2 @32 /* 'Tis a wonder you've lived as long as ye have. */
+	SAY CRITICAL_HIT @33 /* The smell of flesh! */
+	SAY CRITICAL_MISS @34 /* some moan */
+	SAY TARGET_IMMUNE @35 /* Yer wit be as sharp as my blade. */
+	SAY PICKED_POCKET @36 /* My equal is a talent of many men. */
+	SAY SET_A_TRAP @37 /* All of them fools! */
+	SAY HIDDEN_IN_SHADOWS @38 /* Do not make light of me. */
+	SAY SPELL_DISRUPTED @39 /* Soo stupid! */
+	SAY BIO @40
+	
+	WRITE_ASCII 0x248 ~JNMONTS~ #8  // override script where you put all the commands for talks.
+	WRITE_ASCII 0x2cc ~JNMONT~  #8  // dialogue file where we'll put Montaron's greeting dialogue.
+	WRITE_ASCII 0x280 ~%jnmontdv%~  #32 // death variable - when we want to refer to Montaron in the game, we'll call him JNMONT. For example, InParty("JNMONT") means that Montaron is in party.
+	WRITE_ASCII 0x34  ~MONTARM~ #8  // medium portrait
+	WRITE_ASCII 0x3c  ~MONTARL~ #8  // large portrait
+	
+	// TOB
+
+COPY ~%MOD_FOLDER%/cre/JNMON25.cre~ ~override/JNMON25.cre~
+	SAY NAME1 @2 /* Montaron */
+	SAY NAME2 @2 /* Montaron */
+	SAY INITIAL_MEETING @3 /* Keep yer distance, ye goody-goody. I no like the smell of charity. */
+	SAY MORALE @4 /* A pox on ye! I'll no lose my neck to this lot! */
+	SAY HAPPY @5 /* Effective. I may not kill you after all. */
+	SAY UNHAPPY_ANNOYED @6 /* Ye goody goodies make me sick! */ 
+	SAY UNHAPPY_SERIOUS @7 /* Any more of yer nice-nice and I'm gone! */
+	SAY UNHAPPY_BREAKING @8 /* I'll suffer this group no more! Best ye sleep with one eye open! */
+	SAY LEADER @9 /* I have no equal, but I prefer to work alone. */
+	SAY TIRED @10 /* If'n I'm not allowed to sleep, our next assailants may just live. */
+	SAY BORED @11 /* A good blade must be fed. Find prey or I find you. */
+	SAY BATTLE_CRY1 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY2 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY3 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY4 @12 /* And the rivers run red! */
+	SAY BATTLE_CRY5 @12 /* And the rivers run red! */
+	SAY DAMAGE ~~ [JNmonda]
+	SAY DYING ~~ [JNmondy]
+	SAY HURT @15 /* A death be in me if I no get help. */
+	SAY AREA_FOREST @16 /* I hate the woods. Prey be so much easier to find in the city. */
+	SAY AREA_DUNGEON @18 /* Dungeons! The dark be nice, but blast this damp! */
+	SAY AREA_DAY @19 /* I be much preferring the cover of night o'er this blasted daylight! */
+	SAY SELECT_COMMON1 @21 /* Ye spoke at me? */
+	SAY SELECT_COMMON2 @22 /* This better be good */
+	SAY SELECT_COMMON3 @23 /* What need ye dead? */
+	SAY SELECT_COMMON4 @21 /* Ye spoke at me? */
+	SAY SELECT_COMMON5 @22 /* This better be good */
+	SAY SELECT_COMMON6 @23 /* What need ye dead? */
+	SAY SELECT_ACTION1 @24 /* I'll do yer toil. */
+	SAY SELECT_ACTION2 @25 /* Go suck yer blade. */
+	SAY SELECT_ACTION3 @26 /* Sleep lightly, taskmaster. */
+	SAY SELECT_ACTION4 @27 /* I warrant your attention?! Oh frabjous day, callooh callay! */
+	SAY SELECT_ACTION5 @28 /* Arrrr! */
+	SAY SELECT_ACTION6 @29 /* Leave me be, lest your head leave yer neck. */
+	SAY SELECT_ACTION7 @30 /* What part of "I'm a loner" do ye not understand?! */
+	SAY SELECT_RARE1 @31 /* Good or bad, you'll go the way of all flesh. */
+	SAY SELECT_RARE2 @32 /* 'Tis a wonder you've lived as long as ye have. */
+	SAY CRITICAL_HIT @33 /* The smell of flesh! */
+	SAY CRITICAL_MISS @34 /* some moan */
+	SAY TARGET_IMMUNE @35 /* Yer wit be as sharp as my blade. */
+	SAY PICKED_POCKET @36 /* My equal is a talent of many men. */
+	SAY SET_A_TRAP @37 /* All of them fools! */
+	SAY HIDDEN_IN_SHADOWS @38 /* Do not make light of me. */
+	SAY SPELL_DISRUPTED @39 /* Soo stupid! */
+	SAY BIO @40
+	
+	WRITE_ASCII 0x248 ~JNMON25S~ #8  // override script where you put all the commands for talks.
+	WRITE_ASCII 0x2cc ~JNMONT25~  #8  // dialogue file where we'll put Montaron's greeting dialogue.
+	WRITE_ASCII 0x280 ~%jnmontdv%~  #32 // death variable - when we want to refer to Montaron in the game, we'll call him JNMONT. For example, InParty("JNMONT") means that Montaron is in party.
+	WRITE_ASCII 0x34  ~MONTARM~ #8  // medium portrait
+	WRITE_ASCII 0x3c  ~MONTARL~ #8  // large portrait
+	
+COMPILE EVALUATE_BUFFER ~%MOD_FOLDER%/dlg/JNBMONT.d~
+	~%MOD_FOLDER%/dlg/JNMONT.d~
+	~%MOD_FOLDER%/dlg/JNMONTJ.d~
+	~%MOD_FOLDER%/dlg/JNMONTP.d~
+	~%MOD_FOLDER%/dlg/JNPRDLG.d~
+	~%MOD_FOLDER%/dlg/JNVESP.d~
+	~%MOD_FOLDER%/dlg/JNDAVR.d~
+	
+	~%MOD_FOLDER%/baf/JNMONTS.baf~
+	~%MOD_FOLDER%/baf/JNVESPS.baf~
+	~%MOD_FOLDER%/baf/JNDAVRS.baf~
+	~%MOD_FOLDER%/baf/JNMBODY.baf~
+	
+COMPILE EVALUATE_BUFFER ~%MOD_FOLDER%/dlg/JNBMON25.d~
+	~%MOD_FOLDER%/dlg/JNMONT25.d~
+	~%MOD_FOLDER%/dlg/JNMON25J.d~
+	~%MOD_FOLDER%/dlg/JNMON25P.d~
+	
+	~%MOD_FOLDER%/baf/JNMON25S.baf~
+
+// Patch Montaron's bg1 creatures to have my scripts
+ACTION_IF GAME_IS ~eet~ BEGIN
+
+ACTION_FOR_EACH creature IN montar montar2 montar4 montar6 BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%creature%.cre~ THEN BEGIN
+		COPY_EXISTING ~%creature%.cre~ ~override~
+			SAY SELECT_RARE1 @31 /* Good or bad, you'll go the way of all flesh. */
+			SAY SELECT_RARE2 @32 /* 'Tis a wonder you've lived as long as ye have. */
+			SAY CRITICAL_HIT @33 /* The smell of flesh! */
+			SAY CRITICAL_MISS @34 /* some moan */
+			SAY TARGET_IMMUNE @35 /* Yer wit be as sharp as my blade. */
+			SAY PICKED_POCKET @36 /* My equal is a talent of many men. */
+			SAY SET_A_TRAP @37 /* All of them fools! */
+			SAY HIDDEN_IN_SHADOWS @38 /* Do not make light of me. */
+			SAY SPELL_DISRUPTED @39 /* Soo stupid! */
+
+	END
+END
+
+END
+
+// Add Montaron's dialogues and scripts to the game
+APPEND ~pdialog.2da~
+~%jnmontdv% JNMONTP JNMONTJ JNMONTD JNMON25P JNMON25J JNMON25D JNMON25S~
+UNLESS ~%jnmontdv%~
+
+// Banter
+APPEND ~interdia.2da~
+~%jnmontdv% JNBMONT JNBMON25~
+UNLESS ~%jnmontdv%~
+
+// Other creatures & scripts, not related to Montaron's creature
+
+COPY ~%MOD_FOLDER%/cre/JNVESP.cre~ ~override/JNVESP.cre~
+	SAY NAME1 @50 /* Vesper */
+	SAY NAME2 @50 /* Vesper */
+	SAY INITIAL_MEETING @51 /* Oh, my life is in shambles. */
+	SAY SELECT_COMMON1 @51 /* Oh, my life is in shambles. */
+	SAY DYING ~~ [JNLOT04]
+
+	WRITE_ASCII 0x248 ~JNVESPS~ #8
+	WRITE_ASCII 0x2cc ~JNVESP~ #8
+	WRITE_ASCII 0x280 ~JNVESP~  #32
+	WRITE_ASCII 0x34  ~JNVESPM~ #8  // medium portrait
+	WRITE_ASCII 0x3c  ~JNVESPL~ #8  // large portrait
+
+COPY ~%MOD_FOLDER%/cre/JNDAVR.cre~ ~override/JNDAVR.cre~
+	SAY NAME1 @60 /* Davron */
+	SAY NAME2 @60 /* Davron */
+
+	// Give my custom cloak to Davron
+	WRITE_ASCII 0x8a8 ~JNCLK01~ #8
+	WRITE_ASCII 0x65e ~7~ #2
+	
+	WRITE_ASCII 0x248 ~JNDAVRS~ #8
+	WRITE_ASCII 0x2cc ~JNDAVR~ #8
+	WRITE_ASCII 0x280 ~JNDAVR~ #32
+	WRITE_ASCII 0x34  ~JNDAVRM~ #8  // medium portrait
+	WRITE_ASCII 0x3c  ~JNDAVRL~ #8  // large portrait
+
+// Zhentarim Mage
+COPY_EXISTING ~MAGE20.CRE~ ~override/JNGMAGE.CRE~
+	SAY NAME1 @61 /* Zhentarim Mage */
+	SAY NAME2 @61 /* Zhentarim Mage */
+	
+	WRITE_ASCII 0x280 ~JNGMAGE~ #32
+
+ADD_JOURNAL @1000002 @1000003 @1000004 USING ~%MOD_FOLDER%/tra/%LANGUAGE%/SETUP.tra~
+
+COPY ~%MOD_FOLDER%/itm/JNDAG01.itm~ ~override/JNDAG01.itm~
+	SAY NAME1 @200
+	SAY NAME2 @200
+	SAY UNIDENTIFIED_DESC @201
+	SAY DESC @202
+
+	WRITE_ASCII 0x11e ~%jnmontdv%~ #8 // variable for equip restriction
+	
+COPY ~%MOD_FOLDER%/itm/JNSCRL1.itm~ ~override/JNSCRL1.itm~
+	SAY NAME1 @210
+	SAY NAME2 @210
+	SAY DESC @211
+	
+COPY ~%MOD_FOLDER%/itm/JNCLK01.itm~ ~override/JNCLK01.itm~
+	SAY NAME1 @220
+	SAY NAME2 @221
+	SAY UNIDENTIFIED_DESC @222
+	SAY DESC @223
+
+// Modify Docks Area to spawn Montarons Corpse and prevent his standard spawning script
+
+EXTEND_TOP ~AR0309.bcs~ ~%MOD_FOLDER%/baf/AR0309.baf~
+
+COPY_EXISTING "AR0300.ARE" override
+LPF fj_are_structure
+    INT_VAR
+    fj_type        = 11 // Barrel
+    fj_loc_x       = 1561
+    fj_loc_y       = 3557
+    fj_box_left    = 1561
+    fj_box_top     = 3494
+    fj_box_right   = 1591
+    fj_box_bottom  = 3542
+    fj_vertex_0    = 1562 + (3529 << 16)
+    fj_vertex_1    = 1568 + (3540 << 16)
+    fj_vertex_2    = 1573 + (3543 << 16)
+    fj_vertex_3    = 1581 + (3542 << 16)
+	fj_vertex_4    = 1588 + (3535 << 16)
+	fj_vertex_5    = 1591 + (3526 << 16)
+	fj_vertex_6    = 1590 + (3501 << 16)
+	fj_vertex_7    = 1586 + (3497 << 16)
+	fj_vertex_8    = 1578 + (3493 << 16)
+	fj_vertex_9    = 1569 + (3493 << 16)
+	fj_vertex_10	  = 1561 + (3499 << 16)
+	fj_vertex_11   = 1561 + (3525 << 16)
+    STR_VAR
+    fj_structure_type = container
+    fj_name           = ~JNBarrel~
+	fj_trap_script = ~JNMBODY~
+END
+
+// Epilogue
+EXTEND_TOP ~AR6200.bcs~ ~%MOD_FOLDER%/baf/AR6200.baf~
+
+COPY ~%MOD_FOLDER%/epilogue/JNMONZZ.2da~ ~override/JNMON01.2da~
+REPLACE ~99999~ @500
+
+COPY ~%MOD_FOLDER%/epilogue/JNMONZZ.2da~ ~override/JNMON02.2da~
+REPLACE ~99999~ @501
+
+// EET related code
+ACTION_IF GAME_IS ~eet~ BEGIN // check if EET
+	// COMPILE EVALUATE_BUFFER ~%MOD_FOLDER%/dlg/eet/FATESP.d~
+INCLUDE ~EET/other/EET_functions.tph~
+LAF ~EET_NPC_TRANSITION~
+  INT_VAR
+    type = 3
+    default_ToB = 0 //controls if NPC should be spawnable in ToB when the game has been started in ToB (no by default - 0)
+    clean_ToB = 1 //cleans out existing EET code in FATESP.DLG, AR4000.BCS, AR4500.BCS for DV specified in clean_ToB_DV
+  STR_VAR
+    dv = "%jnmontdv%" //Death Variable (script name) of the NPC (must be the same in BG1/SoD/BG2/ToB)
+    override_BG1 = "MONTARON" //name of the override NPC script in BG1
+    override_SoD = "JNMON9S" //name of the override NPC script in SoD (use BG1 one if doesn't exist)
+    override_SoA = "JNMONTS" //name of the override NPC script in SoA
+    override_ToB = "JNMON25S" //name of the override NPC script in ToB (use SoA one if doesn't exist)
+    dialog_ToB = "JNMONT25" //name of the dialogue file used after spawning NPC in ToB (use SoA POST dialogue or initial SoA dialogue file if doesn't exist)
+    cre_ToB = "JNMON25" //if type = 4 and/or default_ToB = 1 name of the ToB CRE file is needed (used to create new CRE rather than migrating existing one from SoA)
+    traFile = "" //an optional TRA file that will be used for the TRA references defined in "string"
+    string = "@600" //FATESP summon text (example: "Bring me Quayle, the gnome cleric/illusionist.") or TRA string number
+    stringPosDV = "Nalia" //set the DV of NPC right below your response (used for sorting FATESP responses alphabetically)
+      //Aerie, Ajantis, Alora, Anomen, Baeloth, Branwen, Cernd, Coran, Corwin, Dorn, Dynaheir, Edwin, Eldoth, Faldorn, Garrick,
+      //Glint, HaerDalis, Hexxat, Imoen2, Jaheira, Jan, Kagain, Keldorn, Khalid, Kivan, Korgan, MKhiin, Mazzy, Minsc, Montaron,
+      //Nalia, Neera, Quayle, Rasaad, Safana, SharTeel, Skie, Tiax, Valygar, Viconia, Voghiln, Wilson, Xan, Xzar, Yeslick, Yoshimo
+      //variable not set (default) = NPC name appended at the end of summoning list
+    SummonedVar = "JNMONTSummoned" //set it only if you want to use different var name than %dv%Summoned (useless in most cases)
+    SpawnPlaneVar = "" //set it only if you want use different var name than %dv%SpawnPlane (useless in most cases)
+    clean_ToB_DV = "Montaron" //if clean_ToB = 1 existing code for this DV will be removed from FATESP.DLG, AR4000.BCS, AR4500.BCS
+END
+END ELSE BEGIN // different Fate Spirit dialogue patching for BG2EE
+	COMPILE EVALUATE_BUFFER ~%MOD_FOLDER%/dlg/FATESP.d~
+END
+
+BEGIN @3000 DESIGNATED 3000 /* Realistic sharper portrait for Xzar and Montaron (by NolSol on NexusMods) */
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @3001
+
+COPY ~%MOD_FOLDER%/bmp/MONTARM.bmp~ ~override/MONTARM.bmp~
+COPY ~%MOD_FOLDER%/bmp/MONTARL.bmp~ ~override/MONTARL.bmp~
+
+ACTION_IF GAME_IS ~bgee eet~ BEGIN
+	COPY ~%MOD_FOLDER%/bmp/XZARM.bmp~ ~override/XZARM.bmp~
+	COPY ~%MOD_FOLDER%/bmp/XZARL.bmp~ ~override/XZARL.bmp~
+END
+
+BEGIN @4000 DESIGNATED 4000 /* Portraits for new NPCs (besides Montaron) */
+REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @4001
+REQUIRE_COMPONENT ~Setup-%MOD_FOLDER%.tp2~ 2000 @2102
+
+COPY ~%MOD_FOLDER%/bmp/JNVESPM.bmp~ ~override/JNVESPM.bmp~
+COPY ~%MOD_FOLDER%/bmp/JNVESPL.bmp~ ~override/JNVESPL.bmp~
+COPY ~%MOD_FOLDER%/bmp/JNDAVRM.bmp~ ~override/JNDAVRM.bmp~
+COPY ~%MOD_FOLDER%/bmp/JNDAVRL.bmp~ ~override/JNDAVRL.bmp~
+
+// below here - crossmod content

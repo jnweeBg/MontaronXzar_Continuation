@@ -1,0 +1,29 @@
+// Move Montaron to Entrance of the Allied Siege Camp (Crusade Battle)
+IF
+	Global("bd_battle","global",1)
+	Global("bd_move_npcs","bd3000",1)  // Allied Siege Camp
+	Global("bd_move_to_entrance","locals",0)
+	Name("Montaron",Myself)  
+	Global("JNMONT_MoveCamp","MYAREA",1)
+THEN
+	RESPONSE #100
+		SetGlobal("bd_move_to_entrance","locals",1)
+		JumpToPoint([1818.320]) // some coordinates at the entrance of the Siege Camp
+		Face(1)
+		SaveObjectLocation("LOCALS","bd_default_loc",Myself)
+END
+
+// Move Xzar to Entrance of the Allied Siege Camp (Crusade Battle)
+IF
+	Global("bd_battle","global",1)
+	Global("bd_move_npcs","bd3000",1)  // Allied Siege Camp
+	Global("bd_move_to_entrance","locals",0)
+	Name("Xzar",Myself)  
+	Global("JNXZAR_MoveCamp","MYAREA",1)
+THEN
+	RESPONSE #100
+		SetGlobal("bd_move_to_entrance","locals",1)
+		JumpToPoint([1848.353]) // some coordinates at the entrance of the Siege Camp
+		Face(2)
+		SaveObjectLocation("LOCALS","bd_default_loc",Myself)
+END

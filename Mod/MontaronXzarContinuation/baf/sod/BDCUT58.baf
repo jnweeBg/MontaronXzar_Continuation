@@ -1,0 +1,23 @@
+// Montaron
+IF
+  Global("JNMONT_kicked_bd4700","global",1) //set in JNMON9P.dlg
+  !Dead("Montaron")
+  !InParty("Montaron")
+THEN
+  RESPONSE #100
+    CutSceneId(Player1)
+    MoveGlobal("bd4400","Montaron",[1354.1101]) // coordinates somewhere near the portal in bd4400.are
+    ActionOverride("Montaron",Face(S))     // or whatever so he is facing the portal
+END
+
+// Xzar
+IF
+  Global("JNXZAR_kicked_bd4700","global",1) //set in JNXZA9P.dlg
+  !Dead("Xzar")
+  !InParty("Xzar")
+THEN
+  RESPONSE #100
+    CutSceneId(Player1)
+    MoveGlobal("bd4400","Xzar",[1306.1197]) // coordinates somewhere near the portal in bd4400.are
+    ActionOverride("Xzar",Face(S))     // or whatever so he is facing the portal
+END

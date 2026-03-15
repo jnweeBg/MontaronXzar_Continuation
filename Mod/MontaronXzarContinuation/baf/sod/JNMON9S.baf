@@ -1,0 +1,102 @@
+// Comment on bridge explosion in bd1000
+
+IF
+	GlobalTimerNotExpired("bd_caelar_timer","bd1000")
+	AreaCheck("bd1000")
+	IsValidForPartyDialog(Myself)
+	Detect(Player1)	
+	Global("JNMONT_SoDbridge","bd1000",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT_SoDbridge","bd1000",1)
+		DisplayStringHead(Myself,@1) /* If ye think a river will keep me blade out of yer backs, think again. */
+END
+
+// Comment on killing Rhinoceros Beetle
+
+IF
+	AreaCheck("bd0114")
+	Global("BD_POINT6","BD0114",4)  // Spider Cave: Rhinoceros Beetle appeared
+	StateCheck("BDBEETRH",STATE_REALLY_DEAD)  // Rhinoceros Beetle
+	Global("JNMONT_BD_BEETLE","BD0114",0)  
+	!GlobalTimerNotExpired("BD_TIMER_RHINOTALK","BD0114")  
+	IfValidForPartyDialog(Myself)  
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@2) /* And nature bows to me! */
+		SetGlobal("JNMONT_BD_BEETLE","BD0114",1)  
+END
+
+// Battle of Bridgefort starts
+
+IF
+	Global("bd_plot","global",250)
+	!GlobalTimerNotExpired("bd_mdd410z_ot_timer","bd2000")  
+	Global("JNMONT_bd_ot","bd2000",0)  
+	IfValidForPartyDialog(Myself)  
+	TriggerOverride(Myself,Range([ENEMY.0.0.0.CRUSADERS],30))
+THEN
+	RESPONSE #100
+		SetGlobalTimer("bd_mdd410z_ot_timer","bd2000",THREE_MINUTES)  // Boareskyr Bridge & Bridgefort
+		SetGlobal("JNMONT_bd_ot","bd2000",1)  
+		DisplayStringHead(Myself,@3) /* Try to run and ye'll feel my blade in yer back! */
+END
+
+// bd4300 comments
+// Hephernan discovers the player
+IF
+	AreaCheck("bd4300")
+	Global("bd_plot","global",370)
+	!GlobalTimerNotExpired("bd_mdd905a_ot_timer","bd4300")  
+	Global("JNMONT_bd_ot","bd4300",0)  
+	IfValidForPartyDialog(Myself)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("bd_mdd905a_ot_timer","bd4300",THREE_MINUTES)  
+		SetGlobal("JNMONT_bd_ot","bd4300",1)
+		DisplayStringHead(Myself,@4) /* Don't be a fool, let's get out of 'ere <CHARNAME>. */
+		SmallWait(8)
+		Continue()
+END
+
+// Comment after first wave of demons if PC lingers
+IF
+	AreaCheck("bd4300")
+	GlobalLT("bd_plot","global",499)
+	Global("bd_mdd1290d_ot","bd4300",1)  
+	Global("JNMONT_bd_mdd1290d_ot","bd4300",0)  
+	IfValidForPartyDialog(Myself)  
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@5) /* Bring it on! I'll slaughter all of'em with ease. */
+		SetGlobal("JNMONT_bd_mdd1290d_ot","bd4300",1)    
+		SmallWait(8)
+		Continue()
+END
+
+// Comment upon entering Avernus
+IF
+	AreaCheck("bd4400")
+	GlobalLT("bd_plot","global",505)
+	IfValidForPartyDialog(Myself)  
+	Global("JNMONT_bd_avernus_bark","bd4400",0) 
+THEN
+	RESPONSE #100
+		DisplayStringWait(Myself,@6) /* This be the place to prove yerselves! */
+	    SetGlobal("JNMONT_bd_avernus_bark","bd4400",1)  
+		SmallWait(8)
+END
+
+// Comment in the Avernus Elevator
+IF
+	GlobalGT("bd_plot","global",554)
+	Global("JNMONT_bd_hellevator_ot","bd4601",0)  
+	IfValidForPartyDialog(Myself)  
+	!GlobalTimerNotExpired("bd_hellevator_timer","bd4601")  
+	!ActuallyInCombat()
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT_bd_hellevator_ot","bd4601",1)  // Avernus Elevator
+		SetGlobalTimer("bd_hellevator_timer","bd4601",7)  
+		DisplayStringHead(Myself,@7) /* Killing demons be almost childplay. And they don't even cry when ye cut'em. */
+END

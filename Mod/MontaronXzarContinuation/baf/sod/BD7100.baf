@@ -1,0 +1,51 @@
+// JNMONTSodRecruited == 1 -> they have been recruited to the crusade and will tag along
+
+// Move Montaron if they spawned & were recruited
+IF
+	!InPartyAllowDead("Montaron")
+	!Dead("Montaron")
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNMONT_MoveCamp","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT_MoveCamp","MYAREA",1)
+		MoveGlobal("BD7100","Montaron",[348.3095])
+		ActionOverride("Montaron",Face(12))
+		ApplySpellRES("bdrejuve","Montaron")
+		ChangeEnemyAlly("Montaron",NEUTRAL)
+		ChangeSpecifics("Montaron",ALLIES)
+		ActionOverride("Montaron",SetGlobal("bd_joined","locals",0))
+		ActionOverride("Montaron",SetGlobal("bd_retreat","locals",0))
+		ActionOverride("Montaron",SaveObjectLocation("LOCALS","bd_default_loc",Myself))
+		ActionOverride("Montaron",ChangeAIScript("JNMON9S",OVERRIDE)) // Montaron's SoD override script
+		ActionOverride("Montaron",ChangeAIScript("BDASC3",CLASS))
+		ActionOverride("Montaron",ChangeAIScript("BDSHOUT",RACE))
+		ActionOverride("Montaron",ChangeAIScript("BDFIGH01",GENERAL))
+		ActionOverride("Montaron",ChangeAIScript("",DEFAULT))
+		Continue()
+END
+
+// Move Xzar if he was recruited and is alive, but not in Party
+IF
+	!InPartyAllowDead("Xzar")
+	!Dead("Xzar")
+	Global("JNMONTSodRecruited","GLOBAL",1)
+	Global("JNXZAR_MoveCamp","MYAREA",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_MoveCamp","MYAREA",1)
+		MoveGlobal("BD7100","Xzar",[321.3124])
+		ActionOverride("Xzar",Face(12))
+		ApplySpellRES("bdrejuve","Xzar")
+		ChangeEnemyAlly("Xzar",NEUTRAL)
+		ChangeSpecifics("Xzar",ALLIES)
+		ActionOverride("Xzar",SetGlobal("bd_joined","locals",0))
+		ActionOverride("Xzar",SetGlobal("bd_retreat","locals",0))
+		ActionOverride("Xzar",SaveObjectLocation("LOCALS","bd_default_loc",Myself))
+		ActionOverride("Xzar",ChangeAIScript("JNXZA9S",OVERRIDE)) //Xzar's SoD override script
+		ActionOverride("Xzar",ChangeAIScript("BDASC3",CLASS))
+		ActionOverride("Xzar",ChangeAIScript("BDSHOUT",RACE))
+		ActionOverride("Xzar",ChangeAIScript("BDMAGE01",GENERAL))
+		ActionOverride("Xzar",ChangeAIScript("",DEFAULT))
+		Continue()
+END

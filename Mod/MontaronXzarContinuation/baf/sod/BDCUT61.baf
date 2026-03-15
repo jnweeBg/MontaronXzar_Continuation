@@ -1,0 +1,21 @@
+// Montaron leaves group after murder accusations
+IF
+	InPartyAllowDead("Montaron")  
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("JNMONT_SoDparty_epilogue","GLOBAL",1)
+		ActionOverride("Montaron",LeaveParty())
+		ActionOverride("Montaron",DestroyAllFragileEquipment(ADAMANTINE))
+END
+
+// Xzar leaves group after murder accusations
+IF
+	InPartyAllowDead("Xzar")  
+THEN
+	RESPONSE #100
+		CutSceneId(Player1)
+		IncrementGlobal("JNMONT_SoDparty_epilogue","GLOBAL",1)
+		ActionOverride("Xzar",LeaveParty())
+		ActionOverride("Xzar",DestroyAllFragileEquipment(ADAMANTINE))
+END

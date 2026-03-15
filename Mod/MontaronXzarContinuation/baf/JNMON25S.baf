@@ -1,0 +1,80 @@
+IF
+	GlobalGT("Chapter","GLOBAL",%bg_chapter_7%)
+	Global("JNMONTSummoned","GLOBAL",0)
+	InParty(Myself)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONTSummoned","GLOBAL",2)
+END
+
+IF
+	GlobalGT("Chapter","GLOBAL",%bg2_chapter_7%)
+    Global("JNMONTSummoned","GLOBAL",1)
+THEN
+    RESPONSE #100
+		DestroyAllEquipment()
+		CreateItem("HELM01",1,0,0)
+		FillSlot(SLOT_HELMET)
+		CreateItem("LEAT12",1,0,0)
+		FillSlot(SLOT_ARMOR)
+		CreateItem("JNDAG01",1,0,0)
+		FillSlot(SLOT_WEAPON0)
+		CreateItem("SW1H74",1,0,0)
+		FillSlot(SLOT_WEAPON1)
+		CreateItem("POTN52",5,0,0)
+        StartDialogueNoSet([PC])
+		Wait(1)
+		Continue()
+END
+
+// Set ToB Exp
+
+IF
+	GlobalGT("Chapter","GLOBAL",%bg2_chapter_7%)
+	InParty(Myself)
+	Global("JNMON25ExperienceSet","GLOBAL",0)
+	XPLT(Myself,2500000)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMON25ExperienceSet","GLOBAL",1)
+		ChangeStat(Myself,XP,2500000,SET)
+		Continue()
+END
+
+IF
+	GlobalGT("Chapter","GLOBAL",%bg2_chapter_7%)
+	InParty(Myself)
+	Global("JNMON25ExperienceSet","GLOBAL",0)
+	!XPLT(Myself,2500000)
+THEN
+	RESPONSE #100
+		SetGlobal("JNMON25ExperienceSet","GLOBAL",1)
+		Continue()
+END
+
+// ToB Talk (help determine Montaron's Ending)
+
+IF
+	GlobalGT("Chapter","GLOBAL",%bg2_chapter_7%)
+	InParty(Myself)
+	Global("JNMONT25Talk","GLOBAL",0)
+THEN
+	RESPONSE #100
+		RealSetGlobalTimer("JNMONT25TalkTimer","GLOBAL",4800)
+		SetGlobal("JNMONT25Talk","GLOBAL",1)
+END
+
+IF
+	Global("JNMONT25Talk","GLOBAL",1)
+	InParty(Myself)
+	RealGlobalTimerExpired("JNMONT25TalkTimer","GLOBAL")
+	See(Player1)
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+	!StateCheck(Myself,CD_STATE_NOTVALID)
+	CombatCounter(0)
+	!See([ENEMY])
+THEN
+	RESPONSE #100
+		SetGlobal("JNMONT25Talk","GLOBAL",2)
+		StartDialogueNoSet(Player1)
+END

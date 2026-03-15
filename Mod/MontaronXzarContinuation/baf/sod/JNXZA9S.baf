@@ -1,0 +1,172 @@
+// First SoD Meeting
+IF
+	See([PC])
+	Range([PC],15)
+	!Global("JNMONTSodTalk","GLOBAL",0)
+	GlobalLT("JNMONTSodTalk","GLOBAL",3)
+THEN 
+	RESPONSE #100
+		SetGlobal("JNMONTSodTalk","GLOBAL",3)
+		StartDialogueNoSet([PC])
+END
+
+// Comment on bridge explosion in bd1000
+
+IF
+	GlobalTimerNotExpired("bd_caelar_timer","bd1000")
+	AreaCheck("bd1000")
+	IsValidForPartyDialog(Myself)
+	Detect(Player1)	
+	Global("JNXZAR_SoDbridge","bd1000",0)
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_SoDbridge","bd1000",1)
+		DisplayStringHead(Myself,@1) /* Fire! Fire everywhere! Death everywhere! ...no? */
+END
+
+// Comment on Caelar at coastway (only Xzar)
+
+IF
+	AreaCheck("bd1000")
+	Global("bd_plot","global",170) //after talking to Bence, this will be at Global("bd_plot","global",175) 
+	Global("JNXZAR_bd_mdd016b","bd1000",0)
+	!GlobalTimerNotExpired("bd_mdd016b_timer","bd1000") // timer to space the NPC comments
+	IsValidForPartyDialog(Myself)
+	TriggerOverride(Myself,Detect(Player1))
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_bd_mdd016b","bd1000",1)
+		SetGlobalTimer("bd_mdd016b_timer","bd1000",ONE_ROUND)
+		DisplayStringHead(Myself,@0) /* Let us gouge her shining eyes out to see where the light comes from. */
+END
+
+// Comment on dead magic ambush
+
+IF
+	AreaCheck("bd0063")
+	Global("BD_NPC01","MYAREA",0) // neither Edwin, Baeloth, Dynaheir, nor Neera gave a warning about dead magic zone
+	IfValidForPartyDialog(Myself)  
+	Delay(3)
+THEN
+	RESPONSE #100
+		SetGlobal("BD_NPC01","MYAREA",1)
+		DisplayStringHead(Myself,@2) /* My magic is gone.. I can not find it. But who took it.. who killed it? We must find him now! */
+END
+
+// Comment on killing Rhinoceros Beetle
+
+IF
+	AreaCheck("bd0114")
+	Global("BD_POINT6","BD0114",4)  // Spider Cave: Rhinoceros Beetle appeared
+	StateCheck("BDBEETRH",STATE_REALLY_DEAD)  // Rhinoceros Beetle
+	Global("JNXZAR_BD_BEETLE","BD0114",0)  
+	!GlobalTimerNotExpired("BD_TIMER_RHINOTALK","BD0114")  
+	IfValidForPartyDialog(Myself)  
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@3) /* What a large bug. But even large bugs get squashed, har har. */
+		SetGlobal("JNXZAR_BD_BEETLE","BD0114",1)  
+END
+
+// Battle of Bridgefort starts
+
+IF
+	Global("bd_plot","global",250)
+	!GlobalTimerNotExpired("bd_mdd410z_ot_timer","bd2000")  
+	Global("JNXZAR_bd_ot","bd2000",0)  
+	IfValidForPartyDialog(Myself)  
+	TriggerOverride(Myself,Range([ENEMY.0.0.0.CRUSADERS],30))
+THEN
+	RESPONSE #100
+		SetGlobalTimer("bd_mdd410z_ot_timer","bd2000",THREE_MINUTES)  // Boareskyr Bridge & Bridgefort
+		SetGlobal("JNXZAR_bd_ot","bd2000",1)  
+		DisplayStringHead(Myself,@4) /* Let it rain deeeaaaath! Hahahar har! */
+END
+
+// Hephernan discovers the player
+IF
+	AreaCheck("bd4300")
+	Global("bd_plot","global",370)
+	!GlobalTimerNotExpired("bd_mdd905a_ot_timer","bd4300")  
+	Global("JNXZAR_bd_ot","bd4300",0)  
+	IfValidForPartyDialog(Myself)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("bd_mdd905a_ot_timer","bd4300",THREE_MINUTES)  
+		SetGlobal("JNXZAR_bd_ot","bd4300",1)
+		DisplayStringHead(Myself,@5) /* I'll tear your limbs off, one by one! ... Later — first I want out of this place. */
+		SmallWait(8)
+		Continue()
+END
+
+// Comment after first wave of demons if PC lingers
+IF
+	AreaCheck("bd4300")
+	GlobalLT("bd_plot","global",499)
+	Global("bd_mdd1290d_ot","bd4300",1)  
+	Global("JNXZAR_bd_mdd1290d_ot","bd4300",0)  
+	IfValidForPartyDialog(Myself)  
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@6) /* More! This is soo much fun! */
+		SetGlobal("JNXZAR_bd_mdd1290d_ot","bd4300",1)    
+		SmallWait(8)
+		Continue()
+END
+
+// Comment after return from Avernus: portal is closed
+IF
+	Global("bd_plot","global",586)
+	!GlobalTimerNotExpired("bd_mdd1341a_ot_timer","bd4300")  
+	Global("JNXZAR_bd_ot2","bd4300",0)  
+	IfValidForPartyDialog(Myself)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("bd_mdd1341a_ot_timer","bd4300",2)  // Dragonspear Castle Basement
+		SetGlobal("JNXZAR_bd_ot2","bd4300",1)  
+		DisplayStringHead(Myself,@7) /* I get that it's hot down there, but I was not done! */  
+		Continue()
+END
+
+// Comment upon entering Avernus
+IF
+	AreaCheck("bd4400")
+	GlobalLT("bd_plot","global",505)
+	IfValidForPartyDialog(Myself)  
+	Global("JNXZAR_bd_avernus_bark","bd4400",0) 
+THEN
+	RESPONSE #100
+		DisplayStringWait(Myself,@8) /* What a nice change of scenery. */
+	    SetGlobal("JNXZAR_bd_avernus_bark","bd4400",1)  
+		SmallWait(8)
+END
+
+// Comment in the Avernus Elevator
+IF
+	GlobalGT("bd_plot","global",554)
+	Global("JNXZAR_bd_hellevator_ot","bd4601",0)  
+	IfValidForPartyDialog(Myself)  
+	!GlobalTimerNotExpired("bd_hellevator_timer","bd4601")  
+	!ActuallyInCombat()
+THEN
+	RESPONSE #100
+		SetGlobal("JNXZAR_bd_hellevator_ot","bd4601",1)  // Avernus Elevator
+		SetGlobalTimer("bd_hellevator_timer","bd4601",7)  
+		DisplayStringHead(Myself,@9) /* I wonder what's up there. More demons? Oh, please let it be more demons! */
+END
+
+// Comment before entering the Cave with the blind Wyrmlings (bd5100aw.bcs). Will only fire if no original NPC gives their line
+IF
+	AreaCheck("bd5100aw")
+	OR(3)
+		Entered([GOODCUTOFF])
+		IsOverMe([GOODCUTOFF])
+		WalkedToTrigger([GOODCUTOFF])
+	Range([PC],20)
+	Global("JNXZAR_BD_SDD317_WYRMS","BD5100",0)  
+	IfValidForPartyDialog(Myself)  
+THEN
+	RESPONSE #100
+	    SetGlobal("JNXZAR_BD_SDD317_WYRMS","BD5100",1)  
+		DisplayStringHead(Myself,@10) /* There is something in the air here. It is... intoxicating. */
+END
