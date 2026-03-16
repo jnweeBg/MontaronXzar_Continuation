@@ -91,7 +91,7 @@ END
 
 // Asana in Amkethran
 
-I_C_T AMASANA 5 JNMONTAmAsana05
+I_C_T AMASANA 4 JNMONTAmAsana05
 == JNMON25J IF ~InParty("%jnmontdv%") InMyArea("%jnmontdv%") !StateCheck("%jnmontdv%",CD_STATE_NOTVALID)~ THEN @1008
 END
 
