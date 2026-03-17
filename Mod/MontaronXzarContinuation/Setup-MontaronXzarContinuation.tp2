@@ -1,5 +1,5 @@
-BACKUP ~weidu_external/backup/MontaronXzarExpansion~
-AUTHOR ~jnwee (janwburner@gmail.com)~
+BACKUP ~weidu_external/backup/MontaronXzarContinuation~
+AUTHOR ~jnweeBg (janwburner@gmail.com)~
 VERSION ~v1.0~
 AUTO_EVAL_STRINGS
 AUTO_TRA ~%MOD_FOLDER%/tra/%s~
@@ -461,7 +461,7 @@ END
 
 BEGIN @4000 DESIGNATED 4000 /* Portraits for new NPCs (besides Montaron) */
 REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @4001
-REQUIRE_COMPONENT ~Setup-%MOD_FOLDER%.tp2~ ~2000~ @2102
+REQUIRE_COMPONENT ~Setup-MontaronXzarContinuation.tp2~ ~2000~ @2102
 
 COPY ~%MOD_FOLDER%/bmp/JNVESPM.bmp~ ~override/JNVESPM.bmp~
 COPY ~%MOD_FOLDER%/bmp/JNVESPL.bmp~ ~override/JNVESPL.bmp~
