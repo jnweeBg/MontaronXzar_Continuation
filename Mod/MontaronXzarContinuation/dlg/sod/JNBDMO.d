@@ -63,7 +63,7 @@ EXIT
 // Join the party again Dialogue with Xzar
 CHAIN IF ~Global("bd_joined","locals",0)
 	!InPartyAllowDead("Xzar")
-	!Dead("Xzar")
+	!StateCheck("Xzar",STATE_REALLY_DEAD)
 	Range("Xzar",30)~ THEN BDMONTAR xk3
 	@9 /* Ye want us for a piece of the action? */
 END
@@ -78,7 +78,7 @@ EXIT
 CHAIN IF ~Global("bd_joined","locals",0)
 	OR(3)
 	InPartyAllowDead("Xzar")
-	Dead("Xzar")
+	StateCheck("Xzar",STATE_REALLY_DEAD)
 	!Range("Xzar",30)~ THEN BDMONTAR xk4
 	@13 /* Ye have need of my skills? */
 END

@@ -1,6 +1,6 @@
 BEGIN JNXZA9
 
-CHAIN IF ~!Dead("Montaron") Range("Montaron",30) Global("JNMONTSodTalk","GLOBAL",3)~ THEN JNXZA9 sodx1
+CHAIN IF ~!StateCheck("Montaron",STATE_REALLY_DEAD) Range("Montaron",30) Global("JNMONTSodTalk","GLOBAL",3)~ THEN JNXZA9 sodx1
 	@2 /* Must you complain so much Montaron. How could I have known that the inn was burned down. */
 	DO ~SetGlobal("JNMONTSodTalk","GLOBAL",4)~
 	== JNMON9 @3 /* If ye don't find us somewhere to sleep soon, I'll find ye a hole in the dirt. */
@@ -65,7 +65,7 @@ END
 + ~~ + @14 EXTERN JNXZA9 sodx1.1. /* I need to find out what this crusade is about and what the Shining Lady's goals are. */
 	
 // If Montaron dies before both are recruited, Xzar leaves
-CHAIN IF ~OR(2) Dead("Montaron") !Range("Montaron",30)~ THEN JNXZA9 sodx3
+CHAIN IF ~OR(2) StateCheck("Montaron",STATE_REALLY_DEAD) !Range("Montaron",30)~ THEN JNXZA9 sodx3
 	@0 /* Oh poor Montaron. */
 	== JNXZA9 @1 /* You must excuse me, but I have to find Montaron, as I seem to have lost him. */
 	DO ~EscapeArea()~

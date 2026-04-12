@@ -63,7 +63,7 @@ EXIT
 // Join the party again Dialogue with Montaron
 CHAIN IF ~Global("bd_joined","locals",0)
 	!InPartyAllowDead("Montaron")
-	!Dead("Montaron")
+	!StateCheck("Montaron",STATE_REALLY_DEAD)
 	Range("Montaron",30)~ THEN BDXZAR xk3
 	@10 /* You're here! We will destroy your enemies! Yes? */
 END
@@ -74,7 +74,7 @@ END
 CHAIN IF ~Global("bd_joined","locals",0)
 	OR(3)
 	InPartyAllowDead("Montaron")
-	Dead("Montaron")
+	StateCheck("Montaron",STATE_REALLY_DEAD)
 	!Range("Montaron",30)~ THEN BDXZAR xk4
 	@10 /* You're here! I will destroy your enemies! Yes? */
 END

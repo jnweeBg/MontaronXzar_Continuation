@@ -9,8 +9,8 @@ IF
 	OR(4)
 	InPartyAllowDead("Montaron")
 	InPartyAllowDead("Xzar")
-	Dead("Montaron")
-	Dead("Xzar")
+	StateCheck("Montaron",STATE_REALLY_DEAD)
+	StateCheck("Xzar",STATE_REALLY_DEAD)
 THEN
 	RESPONSE #100
 		SetGlobal("JNMONTSodSpawn","GLOBAL",2)
@@ -22,8 +22,8 @@ END
 IF
 	BeenInParty("Montaron")
 	BeenInParty("Xzar")
-	!Dead("Montaron")
-	!Dead("Xzar")
+	!StateCheck("Montaron",STATE_REALLY_DEAD)
+	!StateCheck("Xzar",STATE_REALLY_DEAD)
 	Global("JNMONTSodSpawn","GLOBAL",0)
 THEN
 	RESPONSE #100
@@ -50,8 +50,8 @@ END
 IF
 	BeenInParty("Montaron")
 	BeenInParty("Xzar")
-	!Dead("Montaron")
-	!Dead("Xzar")
+	!StateCheck("Montaron",STATE_REALLY_DEAD)
+	!StateCheck("Xzar",STATE_REALLY_DEAD)
 	Global("JNXZARSodSpawn","GLOBAL",0)
 THEN
 	RESPONSE #100
