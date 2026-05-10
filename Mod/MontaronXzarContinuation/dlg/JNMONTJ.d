@@ -394,6 +394,7 @@ EXIT
 
 CHAIN IF ~Global("JNMONTVespTalk","GLOBAL",1)~ THEN JNMONTJ vt
 	@63 /* Finally me dagger is in my hands again! */
+	DO ~SetGlobal("JNMONTVespTalk","GLOBAL",2)~
 END
 + ~Dead("JNVESP")~ + @64 EXTERN JNMONTJ vt.1 /* That thief. He didn't have to die. */
 + ~Dead("JNVESP")~ + @65 EXTERN JNMONTJ vt.2 /* What was that about your boss? */

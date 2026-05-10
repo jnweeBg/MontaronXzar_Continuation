@@ -234,6 +234,7 @@ IF
 	!StateCheck(Myself,CD_STATE_NOTVALID)
 	!See([ENEMY])
 	CombatCounter(0)
+	!Dead("Maevar")
 	Global("JNMONTMaeVarTalk","GLOBAL",1)
 THEN
 	RESPONSE #100

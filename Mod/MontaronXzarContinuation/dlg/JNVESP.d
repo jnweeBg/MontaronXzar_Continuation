@@ -34,13 +34,11 @@ CHAIN JNVESP jnvesp1.1.1.1
 		AddExperienceParty(5000)
 		SetGlobal("JNVESPLives","GLOBAL",1)
 		ActionOverride("JNVESP",DestroyItem("JNDAG01"))
-		ActionOverride("JNVESP",GiveItemCreate("JNDAG01",LastTalkedToBy,0,0,0))
+		ActionOverride("JNVESP",GiveItemCreate("JNDAG01",Player1,0,0,0))
 		AddJournalEntry(@1000004,QUEST_DONE)
 		ActionOverride("JNVESP",Hide())
-		ActionOverride("JNVESP",EscapeAreaNoSee())
-		Wait(4)
 		EndCutSceneMode()~
-	== JNMONTJ @18 /* Fool! Now the Zhentarim'll know I'm alive and come after me for sure. */
+	== JNMONTJ @18 DO ~ActionOverride("JNVESP",EscapeAreaNoSee())~ /* Fool! Now the Zhentarim'll know I'm alive and come after me for sure. */
 EXIT
 
 CHAIN JNVESP jnvesp.kill
