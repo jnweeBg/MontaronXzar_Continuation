@@ -79,8 +79,8 @@ THEN JNBMONT JNMONTJaheira1
 EXIT
 
 CHAIN IF ~GlobalGT("Chapter","GLOBAL",%bg2_chapter_1%)
-	InParty("Jaheira")
-	See("Jaheira")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Jaheira",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -103,8 +103,8 @@ EXIT
 ===================================== */
 
 CHAIN IF ~
-	InParty("Anomen")
-	See("Anomen")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Anomen",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -178,8 +178,8 @@ EXIT
 ===================================== */
 
 CHAIN IF ~
-	InParty("Korgan")
-	See("Korgan")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Korgan",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -196,8 +196,8 @@ THEN BKORGAN JNMONTKorgan1
 EXIT
 
 CHAIN IF ~
-	InParty("Korgan")
-	See("Korgan")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Korgan",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -235,8 +235,8 @@ THEN JNBMONT JNMONTEdwin1
 EXIT
 
 CHAIN IF ~GlobalGT("Chapter","GLOBAL",%bg2_chapter_1%)
-	InParty("Edwin")
-	See("Edwin")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Edwin",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -260,8 +260,8 @@ EXIT
 ===================================== */
 
 CHAIN IF ~GlobalGT("Chapter","GLOBAL",%bg2_chapter_1%)
-	InParty("Viconia")
-	See("Viconia")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Viconia",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -353,8 +353,8 @@ EXIT
 
 
 CHAIN IF ~
-	InParty("Aerie")
-	See("Aerie")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Aerie",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -368,10 +368,10 @@ THEN BAERIE JNMONTAerie1
 	== BAERIE @39 /* See <CHARNAME>! */
 END
 IF ~InParty("Minsc") !StateCheck("Minsc",CD_STATE_NOTVALID)~ THEN EXTERN BMINSC JNMONTAerie1.Minsc
-+ ~!InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID) ReputationGT(Player1,15)~ + @41 EXTERN BAERIE JNMONTAerie1.good /* Calm down Aerie, I will make sure no harm comes to you. */
-+ ~!InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID) ReputationLT(Player1,16)~ + @41 EXTERN BAERIE JNMONTAerie1.bad /* Calm down Aerie, I will make sure no harm comes to you. */
-+ ~!InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ + @42 EXTERN BAERIE JNMONTAerie1.leave /* If you can't stand your ground you shouldn't be part of this group. */
-+ ~!InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ + @43 EXTERN JNBMONT JNMONTAerie1.stay /* You are right Aerie. I will sleep a lot better without your company Montaron, leave at once. */
++ ~OR(2) !InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID) ReputationGT(Player1,15)~ + @41 EXTERN BAERIE JNMONTAerie1.good /* Calm down Aerie, I will make sure no harm comes to you. */
++ ~OR(2) !InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID) ReputationLT(Player1,16)~ + @41 EXTERN BAERIE JNMONTAerie1.bad /* Calm down Aerie, I will make sure no harm comes to you. */
++ ~OR(2) !InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ + @42 EXTERN BAERIE JNMONTAerie1.leave /* If you can't stand your ground you shouldn't be part of this group. */
++ ~OR(2) !InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ + @43 EXTERN JNBMONT JNMONTAerie1.stay /* You are right Aerie. I will sleep a lot better without your company Montaron, leave at once. */
 
 CHAIN BMINSC JNMONTAerie1.Minsc
 	@40 /* Fear not Aerie! Me and Boo will be keeping a sharp eye on the small villain. */
@@ -415,7 +415,7 @@ THEN JNBMONT JNMONTAerie2
 	DO ~SetGlobal("JNMONTAerie1","GLOBAL",2)~
 END
 IF ~InParty("Minsc") !StateCheck("Minsc",CD_STATE_NOTVALID)~ THEN EXTERN BMINSC JNMONTAerie2.Minsc
-IF ~!InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ THEN EXTERN BAERIE JNMONTAerie2.1
+IF ~OR(2) !InParty("Minsc") StateCheck("Minsc",CD_STATE_NOTVALID)~ THEN EXTERN BAERIE JNMONTAerie2.1
 
 CHAIN BMINSC JNMONTAerie2.Minsc
 	@121 /* Bite your tongue, villain. Me and Boo will not tolerate much more mean words to our gentle witch. */
@@ -478,8 +478,8 @@ THEN JNBMONT JNMONTNalia1
 EXIT
 
 CHAIN IF ~
-	InParty("Nalia")
-	See("Nalia")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Nalia",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -499,8 +499,8 @@ THEN BNALIA JNMONTNalia2
 EXIT
 
 CHAIN IF ~
-	InParty("Nalia")
-	See("Nalia")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Nalia",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -510,7 +510,7 @@ THEN BNALIA JNMONTNalia2.1
 	DO ~SetGlobal("JNMONTNalia2","GLOBAL",2) SetGlobal("JNMONTNaliaFriends", "GLOBAL",1)~
 	== JNBMONT @149 /* *sigh* Ye sicken me, girl. Why do ye care so much to know about me. */
 	== BNALIA @150 /* You're out to kill all the time, and I can not understand why. What is so great about fighting, or even worse - killing, that it seems to be all you want. */
-	== JNBMONT @151 /* Let it rest already. There be many people, and little off'em are angles. */
+	== JNBMONT @151 /* Let it rest already. There be many people, and few of them are angels. */
 	== BNALIA @152 /* But there are good people. Stop hating everyone for whatever misersies happened to you. */
 	== JNBMONT @153 /* Pah. I've murdered many and in the end they all look the same, good or bad. Just dead flesh. */
 	== BNALIA @154 /* Think about what you really want in the future, because I am sure it is not murdering and fighting. */
@@ -540,8 +540,8 @@ THEN JNBMONT JNMONTKeldorn1
 EXIT
 
 CHAIN IF ~
-	InParty("Keldorn")
-	See("Keldorn")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Keldorn",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -582,8 +582,8 @@ EXIT
 
 
 CHAIN IF ~
-	InParty("Yoshimo")
-	See("Yoshimo")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Yoshimo",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -630,8 +630,8 @@ EXIT
 
 
 CHAIN IF ~GlobalGT("Chapter","GLOBAL",%bg2_chapter_1%)
-	InParty("Minsc")
-	See("Minsc")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	!StateCheck("Minsc",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -651,8 +651,8 @@ EXIT
 
 
 CHAIN IF ~
-	InParty("Mazzy")
-	See("Mazzy")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	!StateCheck("Mazzy",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -690,8 +690,8 @@ EXIT
 
 
 CHAIN IF ~GlobalGT("Chapter","GLOBAL",%bg2_chapter_1%)
-	InParty("imoen2")
-	See("imoen2")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	!StateCheck("imoen2",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -796,8 +796,8 @@ THEN JNBMONT JNMONTHexxat1
 EXIT
 
 CHAIN IF ~
-	InParty("Hexxat")
-	See("Hexxat")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Hexxat",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)

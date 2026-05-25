@@ -40,8 +40,8 @@ EXIT
 
 CHAIN IF ~
 	Global("JNMONTNaliaFriends","GLOBAL",1)
-	InParty("Nalia")
-	See("Nalia")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Nalia",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -62,8 +62,8 @@ EXIT
 // Sarevok
 
 CHAIN IF ~
-	InParty("Sarevok")
-	See("Sarevok")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Sarevok",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
@@ -85,8 +85,8 @@ CHAIN IF ~
 	OR(2)
 	Global("JNMONTNaliaFriends","GLOBAL",1)
 	!Global("JNMONTGoodEnding","GLOBAL",0)
-	InParty("Keldorn")
-	See("Keldorn")
+	InParty("%jnmontdv%")
+	See("%jnmontdv%")
 	!StateCheck("Keldorn",CD_STATE_NOTVALID)
 	!StateCheck("%jnmontdv%",CD_STATE_NOTVALID)
 	CombatCounter(0)
